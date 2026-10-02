@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Apply | Opportunity Zambia 🇿🇲</title>
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8f5;
+color:#17231a;
+}
+
+header{
+background:#087f3f;
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+}
+
+header a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.hero{
+background:linear-gradient(135deg,#087f3f,#0aa957);
+color:white;
+text-align:center;
+padding:45px 20px;
+}
+
+.hero h1{
+margin:0 0 10px;
+font-size:38px;
+}
+
+.hero p{
+margin:0;
+line-height:1.6;
+}
+
+.container{
+max-width:700px;
+margin:35px auto;
+padding:0 20px;
+}
+
+.form-box{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.form-box h2{
+color:#087f3f;
+margin-top:0;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-top:16px;
+margin-bottom:7px;
+}
+
+input,
+textarea{
+width:100%;
+padding:14px;
+border:1px solid #ccd8cf;
+border-radius:9px;
+font-size:15px;
+font-family:Arial,sans-serif;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+button{
+width:100%;
+background:#087f3f;
+color:white;
+border:0;
+padding:15px;
+border-radius:9px;
+font-size:16px;
+font-weight:bold;
+margin-top:22px;
+cursor:pointer;
+}
+
+button:disabled{
+opacity:.6;
+}
+
+#message{
+text-align:center;
+margin-top:18px;
+font-weight:bold;
+line-height:1.5;
+}
+
+footer{
+background:#063d21;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🇿🇲 Opportunity Zambia
+</div>
+
+<a href="opportunities.html">
+← Opportunities
+</a>
+
+</header>
+
+<section class="hero">
+
+<h1>Apply for Opportunity</h1>
+
+<p>
+Take the next step toward your future.
+</p>
+
+</section>
+
+<div class="container">
+
+<div class="form-box">
+
+<h2>Application Form</h2>
+
+<form id="applicationForm">
+
+<label for="fullName">
+Full Name *
+</label>
+
+<input
+id="fullName"
+type="text"
+placeholder="Enter your full name"
+required
+>
+
+<label for="phone">
+Phone Number *
+</label>
+
+<input
+id="phone"
+type="tel"
+placeholder="Enter your phone number"
+required
+>
+
+<label for="email">
+Email Address
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="Enter your email"
+>
+
+<label for="location">
+Location
+</label>
+
+<input
+id="location"
+type="text"
+placeholder="e.g. Lusaka"
+>
+
+<label for="skills">
+Skills
+</label>
+
+<textarea
+id="skills"
+placeholder="Tell the employer about your skills"
+></textarea>
+
+<label for="messageText">
+Message
+</label>
+
+<textarea
+id="messageText"
+placeholder="Why are you interested in this opportunity?"
+></textarea>
+
+<label for="cvLink">
+CV Link
+</label>
+
+<input
+id="cvLink"
+type="url"
+placeholder="Paste your CV link if you have one"
+>
+
+<button
+id="submitButton"
+type="submit"
+>
+🚀 Submit Application
+</button>
+
+</form>
+
+<div id="message"></div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Opportunity Zambia 🇿🇲
+
+<br><br>
+
+Learn → Build → Work → Earn
+
+</footer>
+
+<script>
+
+const SUPABASE_URL =
+"https://jawhldlfwvgrbothjjkz.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+
+const params =
+new URLSearchParams(window.location.search);
+
+const opportunityId =
+params.get("id");
+
+const form =
+document.getElementById("applicationForm");
+
+const message =
+document.getElementById("message");
+
+const button =
+document.getElementById("submitButton");
+
+if(!opportunityId){
+
+form.style.display = "none";
+
+message.textContent =
+"❌ No opportunity was selected.";
+
+}
+
+form.addEventListener("submit", async function(event){
+
+event.preventDefault();
+
+if(!opportunityId){
+
+return;
+
+}
+
+button.disabled = true;
+
+button.textContent =
+"Submitting...";
+
+message.textContent = "";
+
+const application = {
+
+opportunity_id: opportunityId,
+
+full_name:
+document.getElementById("fullName").value.trim(),
+
+phone:
+document.getElementById("phone").value.trim(),
+
+email:
+document.getElementById("email").value.trim(),
+
+location:
+document.getElementById("location").value.trim(),
+
+skills:
+document.getElementById("skills").value.trim(),
+
+message:
+document.getElementById("messageText").value.trim(),
+
+cv_link:
+document.getElementById("cvLink").value.trim()
+
+};
+
+try{
+
+const response = await fetch(
+
+SUPABASE_URL +
+"/rest/v1/applications",
+
+{
+
+method:"POST",
+
+headers:{
+
+"apikey":SUPABASE_KEY,
+
+"Authorization":
+"Bearer " + SUPABASE_KEY,
+
+"Content-Type":
+"application/json",
+
+"Prefer":"return=minimal"
+
+},
+
+body:JSON.stringify(application)
+
+}
+
+);
+
+if(!response.ok){
+
+throw new Error(
+"Application could not be submitted."
+);
+
+}
+
+message.textContent =
+"🎉 Application submitted successfully! 🇿🇲";
+
+form.reset();
+
+}catch(error){
+
+message.textContent =
+"❌ Something went wrong. Please try again.";
+
+}
+
+button.disabled = false;
+
+button.textContent =
+"🚀 Submit Application";
+
+});
+
+</script>
+
+</body>
+</html>
