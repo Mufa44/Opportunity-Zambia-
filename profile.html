@@ -6,218 +6,344 @@
 <title>Create Profile | Opportunity Zambia 🇿🇲</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f4f8f5;color:#17231a}
-header{background:#087f3f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:23px;font-weight:800}
-header a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:linear-gradient(135deg,#087f3f,#0aa957);color:white;text-align:center;padding:50px 20px}
-.hero h1{font-size:clamp(32px,7vw,52px);margin-bottom:15px}
-.hero p{max-width:650px;margin:auto;line-height:1.6}
-.container{max-width:850px;margin:40px auto;padding:0 20px}
-.form-box{background:white;padding:30px;border-radius:18px;box-shadow:0 5px 25px rgba(0,0,0,.08)}
-h2{color:#087f3f;margin:30px 0 18px;border-bottom:2px solid #e8f5ec;padding-bottom:10px}
-label{display:block;font-weight:bold;margin:15px 0 7px}
-input,select,textarea{width:100%;padding:14px;border:1px solid #ccd8cf;border-radius:9px;font-size:15px;font-family:Arial}
-textarea{min-height:120px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.note{background:#e8f5ec;color:#245c39;padding:15px;border-radius:10px;margin-bottom:25px;line-height:1.5}
-.submit{width:100%;margin-top:30px;background:#087f3f;color:white;border:none;padding:16px;border-radius:10px;font-size:17px;font-weight:bold;cursor:pointer}
-#message{display:none;margin-top:15px;padding:15px;border-radius:10px}
-footer{background:#063d21;color:white;text-align:center;padding:25px;margin-top:50px}
-@media(max-width:600px){.row{grid-template-columns:1fr}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4fff7;
+  color: #123;
+}
+
+header {
+  background: linear-gradient(135deg, #087f23, #0caf45);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+  color: #087f23;
+  margin-top: 0;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 8px;
+  background: #087f23;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.message {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.success {
+  display: block;
+  background: #dff7e5;
+  color: #087f23;
+}
+
+.error {
+  display: block;
+  background: #ffe1e1;
+  color: #b00020;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">🇿🇲 Opportunity Zambia</div>
-<a href="index.html">← Home</a>
+  <h1>Opportunity Zambia 🇿🇲</h1>
+  <a href="index.html">← Home</a>
 </header>
 
-<section class="hero">
-<h1>Create Your Profile</h1>
-<p>Showcase your skills, education and experience so opportunities can find you.</p>
-</section>
-
 <div class="container">
-<div class="form-box">
 
-<div class="note">
-💡 <strong>Build your opportunity profile.</strong>
-Tell employers and organisations what you can do and what opportunity you are looking for.
+  <div class="card">
+
+    <h2>Create Your Profile</h2>
+
+    <p class="subtitle">
+      Showcase your skills, education and experience so opportunities can find you.
+    </p>
+
+    <form id="profileForm">
+
+      <label>First Name</label>
+      <input type="text" id="first_name" required>
+
+      <label>Last Name</label>
+      <input type="text" id="last_name" required>
+
+      <label>Province</label>
+      <select id="location">
+        <option value="">Select Province</option>
+        <option>Lusaka</option>
+        <option>Copperbelt</option>
+        <option>Central</option>
+        <option>Eastern</option>
+        <option>Luapula</option>
+        <option>Northern</option>
+        <option>Muchinga</option>
+        <option>North-Western</option>
+        <option>Southern</option>
+        <option>Western</option>
+      </select>
+
+      <label>Phone Number</label>
+      <input type="tel" id="phone">
+
+      <label>Email</label>
+      <input type="email" id="email" readonly>
+
+      <label>About You</label>
+      <textarea id="about" placeholder="Tell employers about yourself"></textarea>
+
+      <label>Skills</label>
+      <textarea id="skills" placeholder="Example: Computer skills, driving, marketing..."></textarea>
+
+      <label>Education Level</label>
+      <select id="education">
+        <option value="">Select Education Level</option>
+        <option>Grade 12</option>
+        <option>Certificate</option>
+        <option>Diploma</option>
+        <option>Degree</option>
+        <option>Postgraduate</option>
+        <option>Other</option>
+      </select>
+
+      <label>School / College / University</label>
+      <input type="text" id="school">
+
+      <label>Experience</label>
+      <textarea id="experience" placeholder="Describe your work experience"></textarea>
+
+      <label>Opportunity Type</label>
+      <select id="opportunity_type">
+        <option value="">Select Opportunity Type</option>
+        <option>Job</option>
+        <option>Internship</option>
+        <option>Apprenticeship</option>
+        <option>Training</option>
+        <option>Business Opportunity</option>
+        <option>Freelance Work</option>
+      </select>
+
+      <label>Area of Interest</label>
+      <input
+        type="text"
+        id="area_of_interest"
+        placeholder="Example: Technology, Construction, Finance"
+      >
+
+      <label>Portfolio Link</label>
+      <input type="url" id="portfolio" placeholder="https://">
+
+      <label>LinkedIn Link</label>
+      <input type="url" id="linkedin" placeholder="https://">
+
+      <button type="submit" id="saveButton">
+        💾 Save Profile
+      </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+  </div>
+
 </div>
-
-<form id="profileForm">
-
-<h2>👤 Personal Information</h2>
-
-<div class="row">
-<div>
-<label>First Name</label>
-<input id="firstName" required>
-</div>
-
-<div>
-<label>Last Name</label>
-<input id="lastName" required>
-</div>
-</div>
-
-<label>Location</label>
-<select id="location">
-<option value="">Select your province</option>
-<option>Lusaka</option>
-<option>Copperbelt</option>
-<option>Central</option>
-<option>Eastern</option>
-<option>Luapula</option>
-<option>Northern</option>
-<option>Muchinga</option>
-<option>North-Western</option>
-<option>Southern</option>
-<option>Western</option>
-</select>
-
-<label>Phone Number</label>
-<input id="phone" type="tel" placeholder="e.g. 097XXXXXXX">
-
-<label>Email Address</label>
-<input id="email" type="email">
-
-<h2>📝 About You</h2>
-<label>Tell employers about yourself</label>
-<textarea id="about"></textarea>
-
-<h2>🛠️ Skills</h2>
-<label>Your main skills</label>
-<textarea id="skills" placeholder="Example: Sales, coding, welding, farming..."></textarea>
-
-<h2>🎓 Education</h2>
-<label>Highest level of education</label>
-<select id="education">
-<option value="">Select education level</option>
-<option>Grade 12</option>
-<option>Certificate</option>
-<option>Diploma</option>
-<option>Degree</option>
-<option>Postgraduate</option>
-<option>Other</option>
-</select>
-
-<label>School / College / University</label>
-<input id="school">
-
-<h2>💼 Experience</h2>
-<label>Work or practical experience</label>
-<textarea id="experience"></textarea>
-
-<h2>🚀 What Are You Looking For?</h2>
-
-<label>Opportunity type</label>
-<select id="opportunity">
-<option value="">Select an opportunity</option>
-<option>Job</option>
-<option>Internship</option>
-<option>Apprenticeship</option>
-<option>Training</option>
-<option>Business Opportunity</option>
-<option>Freelance Work</option>
-</select>
-
-<label>Area of interest</label>
-<input id="industry" placeholder="Example: Technology, Construction, Agriculture...">
-
-<h2>🔗 Your Links</h2>
-
-<label>Portfolio / Website</label>
-<input id="portfolio" type="url" placeholder="https://...">
-
-<label>LinkedIn</label>
-<input id="linkedin" type="url" placeholder="https://linkedin.com/...">
-
-<button class="submit" type="submit">
-🚀 Create My Profile
-</button>
-
-<div id="message"></div>
-
-</form>
-</div>
-</div>
-
-<footer>
-© 2026 Opportunity Zambia 🇿🇲
-<br><br>
-Learn → Build → Work → Earn
-</footer>
 
 <script>
 
-const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
+const SUPABASE_URL =
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+const SUPABASE_KEY =
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-document.getElementById("profileForm").addEventListener("submit", async function(e){
+const accessToken =
+  localStorage.getItem("oz_access_token");
 
-e.preventDefault();
+const userId =
+  localStorage.getItem("oz_user_id");
 
-const message = document.getElementById("message");
+const form =
+  document.getElementById("profileForm");
 
-message.style.display = "block";
-message.textContent = "Saving your profile...";
+const message =
+  document.getElementById("message");
 
-const profile = {
-first_name: document.getElementById("firstName").value,
-last_name: document.getElementById("lastName").value,
-location: document.getElementById("location").value,
-phone: document.getElementById("phone").value,
-email: document.getElementById("email").value,
-about: document.getElementById("about").value,
-skills: document.getElementById("skills").value,
-education: document.getElementById("education").value,
-school: document.getElementById("school").value,
-experience: document.getElementById("experience").value,
-opportunity_type: document.getElementById("opportunity").value,
-area_of_interest: document.getElementById("industry").value,
-portfolio: document.getElementById("portfolio").value,
-linkedin: document.getElementById("linkedin").value
-};
+const saveButton =
+  document.getElementById("saveButton");
 
-try{
+function showMessage(text, type) {
 
-const response = await fetch(
-SUPABASE_URL + "/rest/v1/profiles",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer " + SUPABASE_KEY,
-"Prefer":"return=minimal"
-},
-body:JSON.stringify(profile)
-}
-);
-
-if(!response.ok){
-throw new Error("Save failed");
-}
-
-message.textContent = "🎉 Profile created successfully! 🇿🇲";
-
-document.getElementById("profileForm").reset();
-
-}catch(error){
-
-message.textContent = "❌ Profile could not be saved. Please try again.";
+  message.textContent = text;
+  message.className = "message " + type;
 
 }
 
-});
+if (!accessToken || !userId) {
 
-</script>
+  showMessage(
+    "🔐 Please login before creating your profile.",
+    "error"
+  );
 
-</body>
-</html>
+  form.style.display = "none";
+
+} else {
+
+  loadUserEmail();
+
+}
+
+async function loadUserEmail() {
+
+  try {
+
+    const response = await fetch(
+      `${SUPABASE_URL}/auth/v1/user`,
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    const user = await response.json();
+
+    if (user.email) {
+      document.getElementById("email").value =
+        user.email;
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+}
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  saveButton.disabled = true;
+  saveButton.textContent = "Saving...";
+
+  const profile = {
+
+    user_id: userId,
+
+    first_name:
+      document.getElementById("first_name").value.trim(),
+
+    last_name:
+      document.getElementById("last_name").value.trim(),
+
+    location:
+      document.getElementById("location").value,
+
+    phone:
+      document.getElementById("phone").value.trim(),
+
+    email:
+      document.getElementById("email").value.trim(),
+
+    about:
+      document.getElementById("about").value.trim(),
+
+    skills:
+      document.getElementById("skills").value.trim(),
+
+    education:
+      document.getElementById("education").value,
+
+    school:
+      document.getElementById("school").value.trim(),
+
+    experience:
+      document.getElementById("experience").value.trim(),
+
+    opportunity_type:
+      document.getElementById("opportunity_type").value,
+
+    area_of_interest:
+      document.getElementById("area_of_interest").value.trim(),
+
+    portfolio:
+      document.getElement
