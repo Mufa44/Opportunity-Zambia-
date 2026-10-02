@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Opportunities | Opportunity Zambia 🇿🇲</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f8f5;
+  color: #17231a;
+}
+
+header {
+  background: #087f3f;
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 800;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  background: linear-gradient(135deg, #087f3f, #0aa957);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 7vw, 55px);
+  margin-bottom: 15px;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.search {
+  max-width: 700px;
+  margin: 30px auto 0;
+  display: flex;
+  gap: 10px;
+}
+
+.search input,
+.search select {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+section {
+  padding: 45px 6%;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 15px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.category {
+  background: white;
+  padding: 25px 15px;
+  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.07);
+}
+
+.category .icon {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.category h3 {
+  color: #087f3f;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title h2 {
+  color: #087f3f;
+  font-size: 30px;
+}
+
+.opportunities {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  gap: 18px;
+}
+
+.opportunity {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.07);
+  border-left: 5px solid #087f3f;
+}
+
+.opportunity h3 {
+  color: #087f3f;
+  margin-bottom: 10px;
+}
+
+.info {
+  color: #66736a;
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-block;
+  background: #e8f5ec;
+  color: #087f3f;
+  padding: 6px 10px;
+  border-radius: 20px;
+  margin: 8px 5px 0 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.apply {
+  display: inline-block;
+  margin-top: 15px;
+  background: #087f3f;
+  color: white;
+  padding: 11px 17px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  background: #063d21;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+@media(max-width:600px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .search {
+    flex-direction: column;
+  }
+
+  section {
+    padding: 40px 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🇿🇲 Opportunity Zambia</div>
+  <a href="index.html">← Home</a>
+</header>
+
+<div class="hero">
+
+  <h1>Find Your Opportunity</h1>
+
+  <p>
+    Discover jobs, internships, apprenticeships, training
+    and other opportunities across Zambia.
+  </p>
+
+  <div class="search">
+    <input type="text" placeholder="Search opportunities...">
+
+    <select>
+      <option>All Categories</option>
+      <option>Jobs</option>
+      <option>Internships</option>
+      <option>Apprenticeships</option>
+      <option>Training</option>
+      <option>Ways to Earn</option>
+    </select>
+  </div>
+
+</div>
+
+<section>
+
+  <div class="title">
+    <h2>Explore Opportunities</h2>
+  </div>
+
+  <div class="categories">
+
+    <div class="category">
+      <div class="icon">💼</div>
+      <h3>Jobs</h3>
+    </div>
+
+    <div class="category">
+      <div class="icon">🎓</div>
+      <h3>Internships</h3>
+    </div>
+
+    <div class="category">
+      <div class="icon">🔧</div>
+      <h3>Apprenticeships</h3>
+    </div>
+
+    <div class="category">
+      <div class="icon">📚</div>
+      <h3>Training</h3>
+    </div>
+
+    <div class="category">
+      <div class="icon">💰</div>
+      <h3>Ways to Earn</h3>
+    </div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="title">
+    <h2>Featured Opportunities</h2>
+    <p>Sample listings — real opportunities will be added later.</p>
+  </div>
+
+  <div class="opportunities">
+
+    <div class="opportunity">
+      <h3>Junior Computer Technician</h3>
+
+      <div class="info">
+        📍 Lusaka<br>
+        🏢 Technology
+      </div>
+
+      <span class="tag">Job</span>
+      <span class="tag">Entry Level</span>
+
+      <br>
+
+      <a href="#" class="apply">View Opportunity</a>
+    </div>
+
+    <div class="opportunity">
+      <h3>Marketing Intern</h3>
+
+      <div class="info">
+        📍 Lusaka<br>
+        🏢 Marketing
+      </div>
+
+      <span class="tag">Internship</span>
+      <span class="tag">Students</span>
+
+      <br>
+
+      <a href="#" class="apply">View Opportunity</a>
+    </div>
+
+    <div class="opportunity">
+      <h3>Electrical Apprenticeship</h3>
+
+      <div class="info">
+        📍 Copperbelt<br>
+        🏢 Technical Skills
+      </div>
+
+      <span class="tag">Apprenticeship</span>
+      <span class="tag">Skills Training</span>
+
+      <br>
+
+      <a href="#" class="apply">View Opportunity</a>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Opportunity Zambia 🇿🇲
+</footer>
+
+</body>
+</html>
