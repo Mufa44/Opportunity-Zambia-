@@ -3,195 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opportunity Zambia 🇿🇲</title>
+
+<title>Opportunity Zambia 🇿🇲 | Learn • Build • Work • Earn</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8f5;
+color:#17231a;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f8f5;
-  color: #17231a;
+header{
+background:#087f3f;
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
 }
 
-header {
-  background: #087f3f;
-  color: white;
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+.logo{
+font-size:23px;
+font-weight:800;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: 800;
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 18px;
-  font-weight: 600;
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
 }
 
-.hero {
-  background: linear-gradient(135deg, #087f3f, #0aa957);
-  color: white;
-  text-align: center;
-  padding: 70px 20px;
+.hero{
+background:linear-gradient(135deg,#087f3f,#0aa957);
+color:white;
+text-align:center;
+padding:75px 20px;
 }
 
-.hero h1 {
-  font-size: clamp(34px, 7vw, 62px);
-  margin-bottom: 18px;
+.hero h1{
+font-size:clamp(38px,8vw,65px);
+margin:0 0 20px;
 }
 
-.hero p {
-  max-width: 720px;
-  margin: auto;
-  font-size: 18px;
-  line-height: 1.6;
+.hero p{
+max-width:700px;
+margin:auto;
+font-size:19px;
+line-height:1.7;
 }
 
-.buttons {
-  margin-top: 28px;
+.buttons{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
 }
 
-.btn {
-  display: inline-block;
-  padding: 14px 22px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 6px;
+.button{
+display:inline-block;
+padding:15px 22px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+font-size:16px;
 }
 
-.primary {
-  background: white;
-  color: #087f3f;
+.primary{
+background:white;
+color:#087f3f;
 }
 
-.secondary {
-  border: 2px solid white;
-  color: white;
+.secondary{
+border:2px solid white;
+color:white;
 }
 
-section {
-  padding: 55px 6%;
+.section{
+max-width:1100px;
+margin:55px auto;
+padding:0 20px;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 35px;
+.section h2{
+text-align:center;
+color:#087f3f;
+font-size:32px;
+margin-bottom:35px;
 }
 
-.section-title h2 {
-  font-size: 32px;
-  color: #087f3f;
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
 }
 
-.section-title p {
-  margin-top: 10px;
-  color: #5d6a61;
+.card{
+background:white;
+padding:28px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,.07);
+text-align:center;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: auto;
+.card .icon{
+font-size:42px;
+margin-bottom:15px;
 }
 
-.card {
-  background: white;
-  padding: 28px 22px;
-  border-radius: 16px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.07);
-  text-align: center;
+.card h3{
+color:#087f3f;
 }
 
-.card .icon {
-  font-size: 40px;
-  margin-bottom: 15px;
+.card p{
+line-height:1.6;
+color:#526057;
 }
 
-.card h3 {
-  margin-bottom: 10px;
-  color: #087f3f;
+.cta{
+background:#087f3f;
+color:white;
+text-align:center;
+padding:55px 20px;
 }
 
-.card p {
-  color: #66736a;
-  line-height: 1.5;
+.cta h2{
+font-size:34px;
+margin-top:0;
 }
 
-.steps {
-  background: #e8f5ec;
+footer{
+background:#063d21;
+color:white;
+text-align:center;
+padding:30px 20px;
 }
 
-.step {
-  border-left: 5px solid #087f3f;
-  text-align: left;
+.footer-links{
+margin:15px 0;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
 }
 
-.number {
-  font-size: 32px;
-  font-weight: 800;
-  color: #087f3f;
+.footer-links a{
+color:white;
+text-decoration:none;
 }
 
-.cta {
-  background: #087f3f;
-  color: white;
-  text-align: center;
-  padding: 60px 20px;
+@media(max-width:750px){
+
+header{
+flex-direction:column;
 }
 
-.cta h2 {
-  font-size: 34px;
-  margin-bottom: 15px;
+.cards{
+grid-template-columns:1fr;
 }
 
-.cta p {
-  max-width: 650px;
-  margin: auto;
-  line-height: 1.6;
+.hero{
+padding:55px 20px;
 }
 
-footer {
-  background: #063d21;
-  color: white;
-  text-align: center;
-  padding: 25px;
-  font-size: 14px;
-}
-
-@media (max-width: 600px) {
-  header {
-    justify-content: center;
-    text-align: center;
-  }
-
-  nav a {
-    margin: 0 7px;
-    font-size: 14px;
-  }
-
-  .hero {
-    padding: 55px 18px;
-  }
-
-  section {
-    padding: 45px 18px;
-  }
 }
 </style>
 </head>
@@ -200,194 +184,150 @@ footer {
 
 <header>
 
-  <div class="logo">🇿🇲 Opportunity Zambia</div>
+<div class="logo">
+🇿🇲 Opportunity Zambia
+</div>
 
-  <nav>
-    <a href="opportunities.html">Opportunities</a>
-    <a href="#how">How It Works</a>
-    <a href="#join">Join</a>
-  </nav>
+<nav>
+<a href="index.html">Home</a>
+<a href="opportunities.html">Opportunities</a>
+<a href="profile.html">Create Profile</a>
+<a href="post-opportunity.html">Post Opportunity</a>
+</nav>
 
 </header>
 
+
 <section class="hero">
 
-  <h1>Your Opportunity Starts Here.</h1>
+<h1>Opportunity Zambia 🇿🇲</h1>
 
-  <p>
-    Opportunity Zambia connects young Zambians with genuine
-    jobs, internships, apprenticeships, training and ways to earn.
-    Showcase your skills and discover opportunities that can help
-    you build your future.
-  </p>
+<p>
+Connecting young Zambians with opportunities to
+learn, build, work, earn, create and connect.
+</p>
 
-  <div class="buttons">
+<div class="buttons">
 
-    <a class="btn primary" href="opportunities.html">
-      Find Opportunities
-    </a>
+<a class="button primary" href="opportunities.html">
+🔎 Find Opportunities
+</a>
 
-    <a class="btn secondary" href="profile.html">
-      Create Your Profile
-    </a>
-
-  </div>
-
-</section>
-
-<section id="opportunities">
-
-  <div class="section-title">
-    <h2>What You Can Find</h2>
-    <p>Discover different ways to learn, work and earn.</p>
-  </div>
-
-  <div class="cards">
-
-    <div class="card">
-      <div class="icon">💼</div>
-      <h3>Jobs</h3>
-      <p>Find employment opportunities from organisations and businesses.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎓</div>
-      <h3>Internships</h3>
-      <p>Gain real-world experience and develop your professional skills.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🔧</div>
-      <h3>Apprenticeships</h3>
-      <p>Learn practical skills from experienced professionals.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📚</div>
-      <h3>Training</h3>
-      <p>Discover courses and training that can help you grow.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">💰</div>
-      <h3>Ways to Earn</h3>
-      <p>Explore legitimate ways to turn your skills into income.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🚀</div>
-      <h3>Build Your Future</h3>
-      <p>Create a profile and show employers what you can do.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="steps" id="how">
-
-  <div class="section-title">
-    <h2>Learn → Build → Work → Earn</h2>
-    <p>A simple path for young Zambians.</p>
-  </div>
-
-  <div class="cards">
-
-    <div class="card step">
-      <div class="number">01</div>
-      <h3>Learn</h3>
-      <p>Discover skills, courses and useful training opportunities.</p>
-    </div>
-
-    <div class="card step">
-      <div class="number">02</div>
-      <h3>Build</h3>
-      <p>Create your profile and showcase your skills and experience.</p>
-    </div>
-
-    <div class="card step">
-      <div class="number">03</div>
-      <h3>Work</h3>
-      <p>Connect with jobs, internships and apprenticeships.</p>
-    </div>
-
-    <div class="card step">
-      <div class="number">04</div>
-      <h3>Earn</h3>
-      <p>Use your skills to find legitimate ways to earn.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<section id="join">
-
-  <div class="section-title">
-    <h2>Be Part of Opportunity Zambia</h2>
-    <p>
-      Whether you are looking for an opportunity or looking for
-      talented young people, this platform is being built for you.
-    </p>
-  </div>
-
-  <div class="cards">
-
-    <div class="card">
-
-      <div class="icon">👨🏾‍💻</div>
-
-      <h3>For Young People</h3>
-
-      <p>
-        Build your profile, showcase your skills and discover
-        opportunities.
-      </p>
-
-      <br>
-
-      <a class="btn primary" href="profile.html">
-        Create Profile
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="icon">🏢</div>
-
-      <h3>For Companies</h3>
-
-      <p>
-        Find young people with the skills you need and publish
-        opportunities.
-      </p>
-
-      <br>
-
-      <a class="btn primary" href="#">
-        Post Opportunity
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-<div class="cta">
-
-  <h2>🇿🇲 Zambia's Young People Have Potential.</h2>
-
-  <p>
-    Opportunity Zambia is about connecting that potential
-    with real opportunities.
-  </p>
+<a class="button secondary" href="profile.html">
+👤 Create Your Profile
+</a>
 
 </div>
 
+</section>
+
+
+<section class="section">
+
+<h2>What You Can Do</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">🔎</div>
+
+<h3>Find Opportunities</h3>
+
+<p>
+Discover jobs, internships, apprenticeships,
+training and other opportunities across Zambia.
+</p>
+
+<a class="button primary" href="opportunities.html">
+Explore Opportunities
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">👤</div>
+
+<h3>Create Your Profile</h3>
+
+<p>
+Showcase your skills, education and experience
+so organisations can discover your potential.
+</p>
+
+<a class="button primary" href="profile.html">
+Create Profile
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🏢</div>
+
+<h3>Post an Opportunity</h3>
+
+<p>
+Organisations can share genuine jobs, internships,
+apprenticeships and training opportunities.
+</p>
+
+<a class="button primary" href="post-opportunity.html">
+Post Opportunity
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="cta">
+
+<h2>Build Your Future in Zambia 🇿🇲</h2>
+
+<p>
+Your skills can open doors. Your opportunity could be next.
+</p>
+
+<div class="buttons">
+
+<a class="button primary" href="profile.html">
+🚀 Start Your Profile
+</a>
+
+<a class="button secondary" href="opportunities.html">
+Explore Opportunities
+</a>
+
+</div>
+
+</section>
+
+
 <footer>
-  © 2026 Opportunity Zambia 🇿🇲 · Built for opportunity, skills and growth.
+
+<strong>🇿🇲 Opportunity Zambia</strong>
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+<a href="opportunities.html">Opportunities</a>
+<a href="profile.html">Create Profile</a>
+<a href="post-opportunity.html">Post Opportunity</a>
+
+</div>
+
+Learn → Build → Work → Earn → Create → Connect
+
+<br><br>
+
+© 2026 Opportunity Zambia
+
 </footer>
 
 </body>
