@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Sign Up - Opportunity Zambia</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4fff7;
+  color: #123;
+}
+
+header {
+  background: linear-gradient(135deg, #087f23, #0caf45);
+  color: white;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.container {
+  max-width: 430px;
+  margin: 35px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+  text-align: center;
+  color: #087f23;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #087f23;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #06691d;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.switch button {
+  background: none;
+  color: #087f23;
+  padding: 5px;
+  margin: 0;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  display: none;
+  text-align: center;
+}
+
+.success {
+  background: #dff7e5;
+  color: #087f23;
+}
+
+.error {
+  background: #ffe1e1;
+  color: #b00020;
+}
+
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #087f23;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Opportunity Zambia 🇿🇲</h1>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2 id="formTitle">Create Your Account</h2>
+
+    <p class="subtitle" id="formSubtitle">
+      Join Opportunity Zambia and discover opportunities.
+    </p>
+
+    <form id="authForm">
+
+      <div id="accountTypeBox">
+        <label>Account Type</label>
+
+        <select id="accountType">
+          <option value="youth">Youth / Job Seeker</option>
+          <option value="employer">Employer / Organization</option>
+        </select>
+      </div>
+
+      <label>Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+      >
+
+      <label>Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Create a password"
+        minlength="6"
+        required
+      >
+
+      <button type="submit" id="submitButton">
+        Create Account
+      </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="switch">
+      <span id="switchText">Already have an account?</span>
+      <button type="button" id="switchButton">
+        Login
+      </button>
+    </div>
+
+    <a class="back" href="index.html">
+      ← Back to Opportunity Zambia
+    </a>
+
+  </div>
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+
+let isLogin = false;
+
+const form = document.getElementById("authForm");
+const formTitle = document.getElementById("formTitle");
+const formSubtitle = document.getElementById("formSubtitle");
+const submitButton = document.getElementById("submitButton");
+const switchText = document.getElementById("switchText");
+const switchButton = document.getElementById("switchButton");
+const accountTypeBox = document.getElementById("accountTypeBox");
+const message = document.getElementById("message");
+
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = "message " + type;
+  message.style.display = "block";
+}
+
+switchButton.addEventListener("click", () => {
+
+  isLogin = !isLogin;
+
+  message.style.display = "none";
+
+  if (isLogin) {
+
+    formTitle.textContent = "Welcome Back";
+    formSubtitle.textContent =
+      "Login to your Opportunity Zambia account.";
+
+    submitButton.textContent = "Login";
+
+    switchText.textContent =
+      "Don't have an account?";
+
+    switchButton.textContent =
+      "Sign Up";
+
+    accountTypeBox.style.display = "none";
+
+  } else {
+
+    formTitle.textContent = "Create Your Account";
+    formSubtitle.textContent =
+      "Join Opportunity Zambia and discover opportunities.";
+
+    submitButton.textContent = "Create Account";
+
+    switchText.textContent =
+      "Already have an account?";
+
+    switchButton.textContent =
+      "Login";
+
+    accountTypeBox.style.display = "block";
+  }
+
+});
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const accountType =
+    document.getElementById("accountType").value;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Please wait...";
+
+  try {
+
+    let response;
+
+    if (isLogin) {
+
+      response = await fetch(
+        `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY
+          },
+
+          body: JSON.stringify({
+            email: email,
+            password: password
+          })
+        }
+      );
+
+    } else {
+
+      response = await fetch(
+        `${SUPABASE_URL}/auth/v1/signup`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY
+          },
+
+          body: JSON.stringify({
+            email: email,
+            password: password
+          })
+        }
+      );
+
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.msg ||
+        data.error_description ||
+        data.message ||
+        "Something went wrong."
+      );
+    }
+
+    if (isLogin) {
+
+      localStorage.setItem(
+        "oz_access_token",
+        data.access_token
+      );
+
+      localStorage.setItem(
+        "oz_refresh_token",
+        data.refresh_token || ""
+      );
+
+      localStorage.setItem(
+        "oz_user_id",
+        data.user.id
+      );
+
+      window.location.href = "index.html";
+
+    } else {
+
+      if (data.access_token) {
+
+        localStorage.setItem(
+          "oz_access_token",
+          data.access_token
+        );
+
+        localStorage.setItem(
+          "oz_refresh_token",
+          data.refresh_token || ""
+        );
+
+        localStorage.setItem(
+          "oz_user_id",
+          data.user.id
+        );
+
+        await saveProfile(
+          data.user.id,
+          email,
+          accountType
+        );
+
+        showMessage(
+          "🎉 Account created successfully! Welcome to Opportunity Zambia 🇿🇲",
+          "success"
+        );
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1500);
+
+      } else {
+
+        showMessage(
+          "🎉 Account created! Check your email to confirm your account.",
+          "success"
+        );
+
+        form.reset();
+      }
+    }
+
+  } catch (error) {
+
+    showMessage(
+      "❌ " + error.message,
+      "error"
+    );
+
+  } finally {
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
+      isLogin ? "Login" : "Create Account";
+  }
+
+});
+
+async function saveProfile(userId, email, accountType) {
+
+  await fetch(
+    `${SUPABASE_URL}/rest/v1/profiles`,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Prefer": "return=minimal"
+      },
+
+      body: JSON.stringify({
+        user_id: userId,
+        email: email,
+        account_type: accountType,
+        first_name: "New",
+        last_name: "User"
+      })
+    }
+  );
+}
+
+</script>
+
+</body>
+</html>
