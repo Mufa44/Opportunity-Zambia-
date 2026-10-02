@@ -3,134 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Find Opportunities | Opportunity Zambia 🇿🇲</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f4f8f5;
-color:#17231a;
+* {
+  box-sizing: border-box;
 }
 
-header{
-background:#087f3f;
-color:white;
-padding:18px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f8f5;
+  color: #17231a;
 }
 
-.logo{
-font-size:23px;
-font-weight:bold;
+header {
+  background: #087f3f;
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header a{
-color:white;
-text-decoration:none;
-font-weight:bold;
+.logo {
+  font-size: 23px;
+  font-weight: bold;
 }
 
-.hero{
-background:linear-gradient(135deg,#087f3f,#0aa957);
-color:white;
-text-align:center;
-padding:55px 20px;
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.hero h1{
-font-size:clamp(34px,7vw,52px);
-margin:0 0 15px;
+.hero {
+  background: linear-gradient(135deg, #087f3f, #0aa957);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
 }
 
-.hero p{
-max-width:650px;
-margin:auto;
-line-height:1.6;
+.hero h1 {
+  font-size: clamp(34px, 7vw, 52px);
+  margin: 0 0 15px;
 }
 
-.container{
-max-width:1000px;
-margin:35px auto;
-padding:0 20px;
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
 }
 
-.search-box{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-margin-bottom:30px;
+.container {
+  max-width: 1000px;
+  margin: 35px auto;
+  padding: 0 20px;
+}
+
+.search-box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+  margin-bottom: 30px;
 }
 
 .search-box input,
-.search-box select{
-width:100%;
-padding:14px;
-margin-bottom:12px;
-border:1px solid #ccd8cf;
-border-radius:9px;
-font-size:15px;
+.search-box select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ccd8cf;
+  border-radius: 9px;
+  font-size: 15px;
+  background: white;
 }
 
-.cards{
-display:grid;
-gap:20px;
+.cards {
+  display: grid;
+  gap: 20px;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 4px 18px rgba(0,0,0,.07);
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.07);
 }
 
-.card h2{
-color:#087f3f;
-margin-top:0;
+.card h2 {
+  color: #087f3f;
+  margin-top: 0;
+  margin-bottom: 12px;
 }
 
-.badge{
-display:inline-block;
-background:#e8f5ec;
-color:#087f3f;
-padding:6px 10px;
-border-radius:20px;
-font-size:13px;
-font-weight:bold;
-margin:3px;
+.badge {
+  display: inline-block;
+  background: #e8f5ec;
+  color: #087f3f;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 3px;
 }
 
-.card p{
-line-height:1.6;
+.card p {
+  line-height: 1.6;
 }
 
-.apply{
-display:inline-block;
-background:#087f3f;
-color:white;
-text-decoration:none;
-padding:12px 18px;
-border-radius:8px;
-font-weight:bold;
-margin-top:10px;
+.apply {
+  display: inline-block;
+  background: #087f3f;
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-#message{
-text-align:center;
-padding:20px;
+.apply:hover {
+  background: #066b35;
 }
 
-footer{
-background:#063d21;
-color:white;
-text-align:center;
-padding:25px;
-margin-top:50px;
+#message {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}
+
+.loading {
+  color: #087f3f;
+}
+
+.error {
+  color: #b00020;
+}
+
+.empty {
+  color: #555;
+}
+
+footer {
+  background: #063d21;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  margin-top: 50px;
+}
+
+@media (min-width: 700px) {
+  .search-box {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .search-box input,
+  .search-box select {
+    margin-bottom: 0;
+  }
 }
 </style>
 </head>
@@ -138,327 +173,428 @@ margin-top:50px;
 <body>
 
 <header>
+  <div class="logo">
+    🇿🇲 Opportunity Zambia
+  </div>
 
-<div class="logo">
-🇿🇲 Opportunity Zambia
-</div>
-
-<a href="index.html">
-← Home
-</a>
-
+  <a href="index.html">
+    ← Home
+  </a>
 </header>
 
 <section class="hero">
+  <h1>Find Your Opportunity</h1>
 
-<h1>Find Your Opportunity</h1>
-
-<p>
-Discover jobs, internships, apprenticeships, training and other opportunities across Zambia.
-</p>
-
+  <p>
+    Discover jobs, internships, apprenticeships, training and other
+    opportunities across Zambia.
+  </p>
 </section>
 
 <div class="container">
 
-<div class="search-box">
+  <div class="search-box">
 
-<input
-id="search"
-type="text"
-placeholder="🔎 Search opportunities..."
->
+    <input
+      id="search"
+      type="text"
+      placeholder="🔎 Search opportunities..."
+      autocomplete="off"
+    >
 
-<select id="type">
+    <select id="type">
+      <option value="">All opportunity types</option>
+      <option value="Job">Job</option>
+      <option value="Internship">Internship</option>
+      <option value="Apprenticeship">Apprenticeship</option>
+      <option value="Training">Training</option>
+      <option value="Business Opportunity">Business Opportunity</option>
+      <option value="Freelance Work">Freelance Work</option>
+    </select>
 
-<option value="">All opportunity types</option>
-<option>Job</option>
-<option>Internship</option>
-<option>Apprenticeship</option>
-<option>Training</option>
-<option>Business Opportunity</option>
-<option>Freelance Work</option>
+    <select id="province">
+      <option value="">All provinces</option>
+      <option value="Lusaka">Lusaka</option>
+      <option value="Copperbelt">Copperbelt</option>
+      <option value="Central">Central</option>
+      <option value="Eastern">Eastern</option>
+      <option value="Luapula">Luapula</option>
+      <option value="Northern">Northern</option>
+      <option value="Muchinga">Muchinga</option>
+      <option value="North-Western">North-Western</option>
+      <option value="Southern">Southern</option>
+      <option value="Western">Western</option>
+    </select>
 
-</select>
+  </div>
 
-<select id="province">
+  <div id="message" class="loading">
+    Loading opportunities...
+  </div>
 
-<option value="">All provinces</option>
-<option>Lusaka</option>
-<option>Copperbelt</option>
-<option>Central</option>
-<option>Eastern</option>
-<option>Luapula</option>
-<option>Northern</option>
-<option>Muchinga</option>
-<option>North-Western</option>
-<option>Southern</option>
-<option>Western</option>
-
-</select>
-
-</div>
-
-<div id="message">
-Loading opportunities...
-</div>
-
-<div class="cards" id="opportunities"></div>
+  <div class="cards" id="opportunities"></div>
 
 </div>
 
 <footer>
-
-© 2026 Opportunity Zambia 🇿🇲
-
-<br><br>
-
-Learn → Build → Work → Earn
-
+  © 2026 Opportunity Zambia 🇿🇲
+  <br><br>
+  Learn → Build → Work → Earn
 </footer>
 
 <script>
 
 const SUPABASE_URL =
-"https://jawhldlfwvgrbothjjkz.supabase.co";
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
 let allOpportunities = [];
 
-async function loadOpportunities(){
 
-try{
+/* =========================
+   LOAD OPPORTUNITIES
+========================= */
 
-const response = await fetch(
+async function loadOpportunities() {
 
-SUPABASE_URL +
-"/rest/v1/opportunities?select=*&order=created_at.desc",
+  const message = document.getElementById("message");
 
-{
+  message.className = "loading";
+  message.textContent = "Loading opportunities...";
 
-headers:{
+  try {
 
-"apikey":SUPABASE_KEY,
+    const url =
+      SUPABASE_URL +
+      "/rest/v1/opportunities" +
+      "?select=*" +
+      "&order=created_at.desc";
 
-"Authorization":
-"Bearer " + SUPABASE_KEY
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+
+      const errorText = await response.text();
+
+      console.error(
+        "Supabase error:",
+        response.status,
+        errorText
+      );
+
+      throw new Error(
+        "Supabase returned " + response.status
+      );
+    }
+
+    const data = await response.json();
+
+    console.log("Supabase opportunities:", data);
+
+    allOpportunities = Array.isArray(data) ? data : [];
+
+    displayOpportunities(allOpportunities);
+
+  } catch (error) {
+
+    console.error("Opportunity loading error:", error);
+
+    message.className = "error";
+
+    message.textContent =
+      "❌ Could not load opportunities. Please try again.";
+
+  }
+}
+
+
+/* =========================
+   DISPLAY OPPORTUNITIES
+========================= */
+
+function displayOpportunities(list) {
+
+  const container =
+    document.getElementById("opportunities");
+
+  const message =
+    document.getElementById("message");
+
+  container.innerHTML = "";
+
+  if (!Array.isArray(list) || list.length === 0) {
+
+    message.className = "empty";
+
+    message.textContent =
+      "No opportunities found.";
+
+    return;
+  }
+
+  message.className = "";
+
+  message.textContent =
+    list.length +
+    " opportunit" +
+    (list.length === 1 ? "y" : "ies") +
+    " found.";
+
+
+  list.forEach(item => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "card";
+
+
+    const title =
+      item.title || "Untitled Opportunity";
+
+    const type =
+      item.opportunity_type || "Opportunity";
+
+    const category =
+      item.category || "General";
+
+    const location =
+      item.location || "Zambia";
+
+    const description =
+      item.description || "No description provided.";
+
+    const organization =
+      item.organization || "Not specified";
+
+    const requirements =
+      item.requirements || "Not specified";
+
+    const deadline =
+      item.deadline || "Not specified";
+
+    const id =
+      item.id || "";
+
+
+    card.innerHTML = `
+
+      <h2>
+        ${escapeHTML(title)}
+      </h2>
+
+      <span class="badge">
+        ${escapeHTML(type)}
+      </span>
+
+      <span class="badge">
+        ${escapeHTML(category)}
+      </span>
+
+      <span class="badge">
+        📍 ${escapeHTML(location)}
+      </span>
+
+      <p>
+        ${escapeHTML(description)}
+      </p>
+
+      <p>
+        <strong>Organization:</strong><br>
+        ${escapeHTML(organization)}
+      </p>
+
+      <p>
+        <strong>Requirements:</strong><br>
+        ${escapeHTML(requirements)}
+      </p>
+
+      <p>
+        <strong>Deadline:</strong><br>
+        ${escapeHTML(deadline)}
+      </p>
+
+      ${
+        id
+        ? `
+          <a
+            class="apply"
+            href="apply.html?id=${encodeURIComponent(id)}"
+          >
+            🚀 Apply Now
+          </a>
+        `
+        : `
+          <span class="badge">
+            Application unavailable
+          </span>
+        `
+      }
+
+    `;
+
+    container.appendChild(card);
+
+  });
 
 }
 
-}
 
-);
+/* =========================
+   FILTER OPPORTUNITIES
+========================= */
 
-if(!response.ok){
+function filterOpportunities() {
 
-throw new Error(
-"Could not load opportunities"
-);
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .trim()
+      .toLowerCase();
 
-}
+  const type =
+    document
+      .getElementById("type")
+      .value
+      .trim()
+      .toLowerCase();
 
-allOpportunities =
-await response.json();
+  const province =
+    document
+      .getElementById("province")
+      .value
+      .trim()
+      .toLowerCase();
 
-displayOpportunities(
-allOpportunities
-);
 
-}catch(error){
+  const filtered =
+    allOpportunities.filter(item => {
 
-document.getElementById(
-"message"
-).textContent =
-"❌ Could not load opportunities.";
+      const title =
+        String(item.title || "");
 
-}
+      const description =
+        String(item.description || "");
 
-}
+      const category =
+        String(item.category || "");
 
-function displayOpportunities(list){
+      const organization =
+        String(item.organization || "");
 
-const container =
-document.getElementById(
-"opportunities"
-);
+      const location =
+        String(item.location || "");
 
-const message =
-document.getElementById(
-"message"
-);
+      const opportunityType =
+        String(item.opportunity_type || "");
 
-container.innerHTML = "";
 
-if(list.length === 0){
+      const searchableText =
+        (
+          title + " " +
+          description + " " +
+          category + " " +
+          organization + " " +
+          location
+        ).toLowerCase();
 
-message.textContent =
-"No opportunities found.";
 
-return;
+      const matchesSearch =
+        searchableText.includes(search);
 
-}
 
-message.textContent =
-list.length +
-" opportunit" +
-(list.length === 1 ? "y" : "ies") +
-" found.";
+      const matchesType =
+        type === "" ||
+        opportunityType.toLowerCase() === type;
 
-list.forEach(item => {
 
-const card =
-document.createElement("div");
+      /*
+       * Use includes() instead of exact matching.
+       * This allows locations such as:
+       * "Lusaka"
+       * "Lusaka, Zambia"
+       * "Lusaka Province"
+       */
+      const matchesProvince =
+        province === "" ||
+        location.toLowerCase().includes(province);
 
-card.className =
-"card";
 
-card.innerHTML = `
+      return (
+        matchesSearch &&
+        matchesType &&
+        matchesProvince
+      );
 
-<h2>
-${escapeHTML(item.title || "")}
-</h2>
+    });
 
-<span class="badge">
-${escapeHTML(item.opportunity_type || "")}
-</span>
 
-<span class="badge">
-${escapeHTML(item.category || "")}
-</span>
-
-<span class="badge">
-📍 ${escapeHTML(item.location || "")}
-</span>
-
-<p>
-${escapeHTML(item.description || "")}
-</p>
-
-<p>
-<strong>Organization:</strong>
-${escapeHTML(item.organization || "")}
-</p>
-
-<p>
-<strong>Requirements:</strong>
-${escapeHTML(item.requirements || "")}
-</p>
-
-<p>
-<strong>Deadline:</strong>
-${escapeHTML(
-item.deadline || "Not specified"
-)}
-</p>
-
-<a
-class="apply"
-href="apply.html?id=${encodeURIComponent(item.id)}"
->
-🚀 Apply Now
-</a>
-
-`;
-
-container.appendChild(card);
-
-});
+  displayOpportunities(filtered);
 
 }
 
-function filterOpportunities(){
 
-const search =
-document.getElementById(
-"search"
-).value.toLowerCase();
+/* =========================
+   ESCAPE HTML
+========================= */
 
-const type =
-document.getElementById(
-"type"
-).value;
+function escapeHTML(value) {
 
-const province =
-document.getElementById(
-"province"
-).value;
+  return String(value)
 
-const filtered =
-allOpportunities.filter(item => {
+    .replace(/&/g, "&amp;")
 
-const text =
+    .replace(/</g, "&lt;")
 
-(item.title || "") +
-" " +
-(item.description || "") +
-" " +
-(item.category || "") +
-" " +
-(item.organization || "");
+    .replace(/>/g, "&gt;")
 
-return (
+    .replace(/"/g, "&quot;")
 
-text.toLowerCase()
-.includes(search)
-
-&&
-
-(
-type === "" ||
-item.opportunity_type === type
-)
-
-&&
-
-(
-province === "" ||
-item.location === province
-)
-
-);
-
-});
-
-displayOpportunities(
-filtered
-);
-
+    .replace(/'/g, "&#039;");
 }
 
-function escapeHTML(text){
 
-return String(text)
-
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
+/* =========================
+   EVENTS
+========================= */
 
 document
-.getElementById("search")
-.addEventListener(
-"input",
-filterOpportunities
-);
+  .getElementById("search")
+  .addEventListener(
+    "input",
+    filterOpportunities
+  );
+
 
 document
-.getElementById("type")
-.addEventListener(
-"change",
-filterOpportunities
-);
+  .getElementById("type")
+  .addEventListener(
+    "change",
+    filterOpportunities
+  );
+
 
 document
-.getElementById("province")
-.addEventListener(
-"change",
-filterOpportunities
-);
+  .getElementById("province")
+  .addEventListener(
+    "change",
+    filterOpportunities
+  );
+
+
+/* =========================
+   START
+========================= */
 
 loadOpportunities();
 
