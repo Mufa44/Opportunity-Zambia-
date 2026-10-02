@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Profile | Opportunity Zambia 🇿🇲</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f8f5;
+  color: #17231a;
+}
+
+header {
+  background: #087f3f;
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 800;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  background: linear-gradient(135deg, #087f3f, #0aa957);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 7vw, 52px);
+  margin-bottom: 15px;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 5px 25px rgba(0,0,0,.08);
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h2 {
+  color: #087f3f;
+  margin-bottom: 18px;
+  font-size: 23px;
+  border-bottom: 2px solid #e8f5ec;
+  padding-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+  margin-top: 15px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccd8cf;
+  border-radius: 9px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #087f3f;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.skills {
+  background: #f4f8f5;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.skills p {
+  color: #66736a;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.submit {
+  width: 100%;
+  background: #087f3f;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #066c35;
+}
+
+.note {
+  background: #e8f5ec;
+  color: #245c39;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+footer {
+  background: #063d21;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-box {
+    padding: 22px 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">🇿🇲 Opportunity Zambia</div>
+
+  <a href="index.html">← Home</a>
+
+</header>
+
+<section class="hero">
+
+  <h1>Create Your Profile</h1>
+
+  <p>
+    Showcase your skills, education and experience so
+    opportunities can find you.
+  </p>
+
+</section>
+
+<div class="container">
+
+  <div class="form-box">
+
+    <div class="note">
+      💡 <strong>Build your opportunity profile.</strong>
+      Tell employers and organisations what you can do,
+      what you have learned and what kind of opportunity
+      you are looking for.
+    </div>
+
+    <!-- PERSONAL INFORMATION -->
+
+    <div class="form-section">
+
+      <h2>👤 Personal Information</h2>
+
+      <div class="row">
+
+        <div>
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            placeholder="Enter your first name"
+          >
+        </div>
+
+        <div>
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            placeholder="Enter your last name"
+          >
+        </div>
+
+      </div>
+
+      <label for="location">Location</label>
+
+      <select id="location">
+
+        <option value="">Select your province</option>
+
+        <option>Lusaka</option>
+        <option>Copperbelt</option>
+        <option>Central</option>
+        <option>Eastern</option>
+        <option>Luapula</option>
+        <option>Northern</option>
+        <option>Muchinga</option>
+        <option>North-Western</option>
+        <option>Southern</option>
+        <option>Western</option>
+
+      </select>
+
+      <label for="phone">Phone Number</label>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="e.g. 097XXXXXXX"
+      >
+
+      <label for="email">Email Address</label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email address"
+      >
+
+    </div>
+
+
+    <!-- ABOUT YOU -->
+
+    <div class="form-section">
+
+      <h2>📝 About You</h2>
+
+      <label for="about">
+        Tell employers about yourself
+      </label>
+
+      <textarea
+        id="about"
+        placeholder="Example: I am a motivated young Zambian interested in technology, business and learning new skills..."
+      ></textarea>
+
+    </div>
+
+
+    <!-- SKILLS -->
+
+    <div class="form-section">
+
+      <h2>🛠️ Skills</h2>
+
+      <label for="skills">
+        Your main skills
+      </label>
+
+      <textarea
+        id="skills"
+        placeholder="Example: Computer repair, graphic design, sales, plumbing, welding, coding..."
+      ></textarea>
+
+      <div class="skills">
+
+        <p>
+          💡 Tip: Add skills that you can actually demonstrate.
+        </p>
+
+        <p>
+          Examples: Communication • Sales • Coding • Driving •
+          Carpentry • Farming • Photography • Graphic Design
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- EDUCATION -->
+
+    <div class="form-section">
+
+      <h2>🎓 Education</h2>
+
+      <label for="education">
+        Highest level of education
+      </label>
+
+      <select id="education">
+
+        <option value="">Select education level</option>
+
+        <option>Grade 12</option>
+        <option>Certificate</option>
+        <option>Diploma</option>
+        <option>Degree</option>
+        <option>Postgraduate</option>
+        <option>Other</option>
+
+      </select>
+
+      <label for="school">
+        School / College / University
+      </label>
+
+      <input
+        type="text"
+        id="school"
+        placeholder="Enter institution name"
+      >
+
+    </div>
+
+
+    <!-- EXPERIENCE -->
+
+    <div class="form-section">
+
+      <h2>💼 Experience</h2>
+
+      <label for="experience">
+        Work or practical experience
+      </label>
+
+      <textarea
+        id="experience"
+        placeholder="Tell us about your previous work, business, volunteering, projects or practical experience..."
+      ></textarea>
+
+    </div>
+
+
+    <!-- OPPORTUNITY -->
+
+    <div class="form-section">
+
+      <h2>🚀 What Are You Looking For?</h2>
+
+      <label for="opportunity">
+        Opportunity type
+      </label>
+
+      <select id="opportunity">
+
+        <option value="">Select an opportunity</option>
+
+        <option>Job</option>
+        <option>Internship</option>
+        <option>Apprenticeship</option>
+        <option>Training</option>
+        <option>Business Opportunity</option>
+        <option>Freelance Work</option>
+
+      </select>
+
+      <label for="industry">
+        Area of interest
+      </label>
+
+      <input
+        type="text"
+        id="industry"
+        placeholder="Example: Technology, Construction, Agriculture, Finance..."
+      >
+
+    </div>
+
+
+    <!-- LINKS -->
+
+    <div class="form-section">
+
+      <h2>🔗 Your Links</h2>
+
+      <label for="portfolio">
+        Portfolio / Website
+      </label>
+
+      <input
+        type="url"
+        id="portfolio"
+        placeholder="https://..."
+      >
+
+      <label for="linkedin">
+        LinkedIn
+      </label>
+
+      <input
+        type="url"
+        id="linkedin"
+        placeholder="https://linkedin.com/..."
+      >
+
+    </div>
+
+
+    <!-- BUTTON -->
+
+    <button class="submit" type="button">
+      🚀 Create My Profile
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+
+  © 2026 Opportunity Zambia 🇿🇲
+  <br><br>
+  Learn → Build → Work → Earn
+
+</footer>
+
+</body>
+</html>
