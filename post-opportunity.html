@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post an Opportunity | Opportunity Zambia 🇿🇲</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f8f5;color:#17231a}
+header{background:#087f3f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold}
+header a{color:white;text-decoration:none;font-weight:bold}
+.hero{background:linear-gradient(135deg,#087f3f,#0aa957);color:white;text-align:center;padding:50px 20px}
+.hero h1{font-size:clamp(34px,7vw,50px);margin:0 0 15px}
+.hero p{max-width:650px;margin:auto;line-height:1.6}
+.container{max-width:850px;margin:40px auto;padding:0 20px}
+.form-box{background:white;padding:30px;border-radius:18px;box-shadow:0 5px 25px rgba(0,0,0,.08)}
+h2{color:#087f3f;border-bottom:2px solid #e8f5ec;padding-bottom:10px;margin-top:30px}
+label{display:block;font-weight:bold;margin:15px 0 7px}
+input,select,textarea{width:100%;padding:14px;border:1px solid #ccd8cf;border-radius:9px;font-size:15px;font-family:Arial}
+textarea{min-height:130px;resize:vertical}
+.submit{width:100%;margin-top:30px;background:#087f3f;color:white;border:none;padding:16px;border-radius:10px;font-size:17px;font-weight:bold;cursor:pointer}
+.note{background:#e8f5ec;color:#245c39;padding:15px;border-radius:10px;line-height:1.5}
+#message{display:none;margin-top:15px;padding:15px;border-radius:10px}
+footer{background:#063d21;color:white;text-align:center;padding:25px;margin-top:50px}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">🇿🇲 Opportunity Zambia</div>
+<a href="index.html">← Home</a>
+</header>
+
+<section class="hero">
+<h1>Post an Opportunity</h1>
+<p>Help young Zambians discover genuine jobs, internships, apprenticeships and training opportunities.</p>
+</section>
+
+<div class="container">
+
+<div class="form-box">
+
+<div class="note">
+💡 Please provide accurate information. Opportunity Zambia is designed to connect young people with genuine opportunities.
+</div>
+
+<form id="opportunityForm">
+
+<h2>🏢 Organisation</h2>
+
+<label>Organisation / Company Name</label>
+<input id="organization" required placeholder="Enter organisation name">
+
+<h2>💼 Opportunity</h2>
+
+<label>Opportunity Title</label>
+<input id="title" required placeholder="Example: Junior Computer Technician">
+
+<label>Opportunity Type</label>
+<select id="opportunityType" required>
+<option value="">Select type</option>
+<option>Job</option>
+<option>Internship</option>
+<option>Apprenticeship</option>
+<option>Training</option>
+<option>Business Opportunity</option>
+<option>Freelance Work</option>
+</select>
+
+<label>Category</label>
+<input id="category" required placeholder="Example: Technology, Agriculture, Finance">
+
+<label>Location / Province</label>
+<select id="location">
+<option value="">Select province</option>
+<option>Lusaka</option>
+<option>Copperbelt</option>
+<option>Central</option>
+<option>Eastern</option>
+<option>Luapula</option>
+<option>Northern</option>
+<option>Muchinga</option>
+<option>North-Western</option>
+<option>Southern</option>
+<option>Western</option>
+</select>
+
+<h2>📝 Details</h2>
+
+<label>Description</label>
+<textarea id="description" required placeholder="Describe the opportunity..."></textarea>
+
+<label>Requirements</label>
+<textarea id="requirements" placeholder="List the main requirements..."></textarea>
+
+<h2>🔗 Application</h2>
+
+<label>Application Link</label>
+<input id="applicationLink" type="url" placeholder="https://...">
+
+<label>Application Deadline</label>
+<input id="deadline" type="date">
+
+<button class="submit" type="submit">
+🚀 Post Opportunity
+</button>
+
+<div id="message"></div>
+
+</form>
+
+</div>
+</div>
+
+<footer>
+© 2026 Opportunity Zambia 🇿🇲
+<br><br>
+Learn → Build → Work → Earn
+</footer>
+
+<script>
+
+const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+
+document.getElementById("opportunityForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const message = document.getElementById("message");
+
+message.style.display = "block";
+message.textContent = "Posting opportunity...";
+
+const opportunity = {
+organization: document.getElementById("organization").value,
+title: document.getElementById("title").value,
+opportunity_type: document.getElementById("opportunityType").value,
+category: document.getElementById("category").value,
+location: document.getElementById("location").value,
+description: document.getElementById("description").value,
+requirements: document.getElementById("requirements").value,
+application_link: document.getElementById("applicationLink").value || "#",
+deadline: document.getElementById("deadline").value || null
+};
+
+try{
+
+const response = await fetch(
+SUPABASE_URL + "/rest/v1/opportunities",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer " + SUPABASE_KEY,
+"Prefer":"return=minimal"
+},
+body:JSON.stringify(opportunity)
+}
+);
+
+if(!response.ok){
+throw new Error("Post failed");
+}
+
+message.textContent = "🎉 Opportunity posted successfully! 🇿🇲";
+
+document.getElementById("opportunityForm").reset();
+
+}catch(error){
+
+message.textContent = "❌ Opportunity could not be posted. Please try again.";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
