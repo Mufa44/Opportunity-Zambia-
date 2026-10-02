@@ -7,86 +7,235 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f5;color:#17231a}
-header{background:#087f3f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:23px;font-weight:bold}
-header a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:linear-gradient(135deg,#087f3f,#0aa957);color:white;text-align:center;padding:55px 20px}
-.hero h1{font-size:clamp(34px,7vw,52px);margin:0 0 15px}
-.hero p{max-width:650px;margin:auto;line-height:1.6}
-.container{max-width:1000px;margin:35px auto;padding:0 20px}
-.search-box{background:white;padding:20px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.08);margin-bottom:30px}
-.search-box input,.search-box select{width:100%;padding:14px;margin-bottom:12px;border:1px solid #ccd8cf;border-radius:9px;font-size:15px}
-.cards{display:grid;gap:20px}
-.card{background:white;padding:25px;border-radius:15px;box-shadow:0 4px 18px rgba(0,0,0,.07)}
-.card h2{color:#087f3f;margin-top:0}
-.badge{display:inline-block;background:#e8f5ec;color:#087f3f;padding:6px 10px;border-radius:20px;font-size:13px;font-weight:bold;margin:3px}
-.card p{line-height:1.6}
-.apply{display:inline-block;background:#087f3f;color:white;text-decoration:none;padding:12px 18px;border-radius:8px;font-weight:bold;margin-top:10px}
-#message{text-align:center;padding:20px}
-footer{background:#063d21;color:white;text-align:center;padding:25px;margin-top:50px}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8f5;
+color:#17231a;
+}
+
+header{
+background:#087f3f;
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+}
+
+header a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.hero{
+background:linear-gradient(135deg,#087f3f,#0aa957);
+color:white;
+text-align:center;
+padding:55px 20px;
+}
+
+.hero h1{
+font-size:clamp(34px,7vw,52px);
+margin:0 0 15px;
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+line-height:1.6;
+}
+
+.container{
+max-width:1000px;
+margin:35px auto;
+padding:0 20px;
+}
+
+.search-box{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.search-box input,
+.search-box select{
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border:1px solid #ccd8cf;
+border-radius:9px;
+font-size:15px;
+}
+
+.cards{
+display:grid;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 4px 18px rgba(0,0,0,.07);
+}
+
+.card h2{
+color:#087f3f;
+margin-top:0;
+}
+
+.badge{
+display:inline-block;
+background:#e8f5ec;
+color:#087f3f;
+padding:6px 10px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
+margin:3px;
+}
+
+.card p{
+line-height:1.6;
+}
+
+.apply{
+display:inline-block;
+background:#087f3f;
+color:white;
+text-decoration:none;
+padding:12px 18px;
+border-radius:8px;
+font-weight:bold;
+margin-top:10px;
+}
+
+#message{
+text-align:center;
+padding:20px;
+}
+
+footer{
+background:#063d21;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:50px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="logo">🇿🇲 Opportunity Zambia</div>
+
 <a href="index.html">← Home</a>
+
 </header>
 
 <section class="hero">
+
 <h1>Find Your Opportunity</h1>
-<p>Discover jobs, internships, apprenticeships, training and other opportunities across Zambia.</p>
+
+<p>
+Discover jobs, internships, apprenticeships, training and other opportunities across Zambia.
+</p>
+
 </section>
 
 <div class="container">
 
 <div class="search-box">
-<input id="search" type="text" placeholder="🔎 Search opportunities...">
+
+<input
+id="search"
+type="text"
+placeholder="🔎 Search opportunities..."
+>
 
 <select id="type">
+
 <option value="">All opportunity types</option>
+
 <option>Job</option>
+
 <option>Internship</option>
+
 <option>Apprenticeship</option>
+
 <option>Training</option>
+
 <option>Business Opportunity</option>
+
 <option>Freelance Work</option>
+
 </select>
 
 <select id="province">
+
 <option value="">All provinces</option>
+
 <option>Lusaka</option>
+
 <option>Copperbelt</option>
+
 <option>Central</option>
+
 <option>Eastern</option>
+
 <option>Luapula</option>
+
 <option>Northern</option>
+
 <option>Muchinga</option>
+
 <option>North-Western</option>
+
 <option>Southern</option>
+
 <option>Western</option>
+
 </select>
+
 </div>
 
-<div id="message">Loading opportunities...</div>
+<div id="message">
+Loading opportunities...
+</div>
 
 <div class="cards" id="opportunities"></div>
 
 </div>
 
 <footer>
+
 © 2026 Opportunity Zambia 🇿🇲
+
 <br><br>
+
 Learn → Build → Work → Earn
+
 </footer>
 
 <script>
 
-const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
+const SUPABASE_URL =
+"https://jawhldlfwvgrbothjjkz.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+const SUPABASE_KEY =
+"sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
 let allOpportunities = [];
 
@@ -95,7 +244,8 @@ async function loadOpportunities(){
 try{
 
 const response = await fetch(
-SUPABASE_URL + "/rest/v1/opportunities?select=*&order=created_at.desc",
+SUPABASE_URL +
+"/rest/v1/opportunities?select=*&order=created_at.desc",
 {
 headers:{
 "apikey":SUPABASE_KEY,
@@ -105,7 +255,9 @@ headers:{
 );
 
 if(!response.ok){
+
 throw new Error("Could not load opportunities");
+
 }
 
 allOpportunities = await response.json();
@@ -123,45 +275,83 @@ document.getElementById("message").textContent =
 
 function displayOpportunities(list){
 
-const container = document.getElementById("opportunities");
-const message = document.getElementById("message");
+const container =
+document.getElementById("opportunities");
+
+const message =
+document.getElementById("message");
 
 container.innerHTML = "";
 
 if(list.length === 0){
 
-message.textContent = "No opportunities found.";
+message.textContent =
+"No opportunities found.";
 
 return;
 
 }
 
-message.textContent = list.length + " opportunity" + (list.length === 1 ? "" : "ies") + " found.";
+/* FIXED WORDING */
+
+message.textContent =
+list.length +
+" opportunit" +
+(list.length === 1 ? "y" : "ies") +
+" found.";
 
 list.forEach(item => {
 
-const card = document.createElement("div");
+const card =
+document.createElement("div");
 
 card.className = "card";
 
 card.innerHTML = `
-<h2>${escapeHTML(item.title || "")}</h2>
 
-<span class="badge">${escapeHTML(item.opportunity_type || "")}</span>
-<span class="badge">${escapeHTML(item.category || "")}</span>
-<span class="badge">📍 ${escapeHTML(item.location || "")}</span>
+<h2>
+${escapeHTML(item.title || "")}
+</h2>
 
-<p>${escapeHTML(item.description || "")}</p>
+<span class="badge">
+${escapeHTML(item.opportunity_type || "")}
+</span>
 
-<p><strong>Organization:</strong> ${escapeHTML(item.organization || "")}</p>
+<span class="badge">
+${escapeHTML(item.category || "")}
+</span>
 
-<p><strong>Requirements:</strong> ${escapeHTML(item.requirements || "")}</p>
+<span class="badge">
+📍 ${escapeHTML(item.location || "")}
+</span>
 
-<p><strong>Deadline:</strong> ${escapeHTML(item.deadline || "Not specified")}</p>
+<p>
+${escapeHTML(item.description || "")}
+</p>
 
-<a class="apply" href="${safeURL(item.application_link)}" target="_blank">
+<p>
+<strong>Organization:</strong>
+${escapeHTML(item.organization || "")}
+</p>
+
+<p>
+<strong>Requirements:</strong>
+${escapeHTML(item.requirements || "")}
+</p>
+
+<p>
+<strong>Deadline:</strong>
+${escapeHTML(item.deadline || "Not specified")}
+</p>
+
+<a
+class="apply"
+href="${safeURL(item.application_link)}"
+target="_blank"
+>
 Apply / Learn More
 </a>
+
 `;
 
 container.appendChild(card);
@@ -172,23 +362,46 @@ container.appendChild(card);
 
 function filterOpportunities(){
 
-const search = document.getElementById("search").value.toLowerCase();
-const type = document.getElementById("type").value;
-const province = document.getElementById("province").value;
+const search =
+document.getElementById("search")
+.value
+.toLowerCase();
 
-const filtered = allOpportunities.filter(item => {
+const type =
+document.getElementById("type")
+.value;
 
-const text = (
-(item.title || "") + " " +
-(item.description || "") + " " +
-(item.category || "") + " " +
-(item.organization || "")
-).toLowerCase();
+const province =
+document.getElementById("province")
+.value;
+
+const filtered =
+allOpportunities.filter(item => {
+
+const text =
+
+(item.title || "") +
+" " +
+(item.description || "") +
+" " +
+(item.category || "") +
+" " +
+(item.organization || "");
 
 return (
-text.includes(search) &&
-(type === "" || item.opportunity_type === type) &&
-(province === "" || item.location === province)
+
+text.toLowerCase().includes(search)
+
+&&
+
+(type === "" ||
+item.opportunity_type === type)
+
+&&
+
+(province === "" ||
+item.location === province)
+
 );
 
 });
@@ -200,24 +413,36 @@ displayOpportunities(filtered);
 function escapeHTML(text){
 
 return String(text)
+
 .replace(/&/g,"&amp;")
+
 .replace(/</g,"&lt;")
+
 .replace(/>/g,"&gt;")
+
 .replace(/"/g,"&quot;")
+
 .replace(/'/g,"&#039;");
 
 }
 
 function safeURL(url){
 
-if(!url || url === "#") return "#";
+if(!url || url === "#")
+return "#";
 
 try{
 
-const parsed = new URL(url);
+const parsed =
+new URL(url);
 
-if(parsed.protocol === "http:" || parsed.protocol === "https:"){
+if(
+parsed.protocol === "http:" ||
+parsed.protocol === "https:"
+){
+
 return parsed.href;
+
 }
 
 }catch(e){}
@@ -226,9 +451,26 @@ return "#";
 
 }
 
-document.getElementById("search").addEventListener("input",filterOpportunities);
-document.getElementById("type").addEventListener("change",filterOpportunities);
-document.getElementById("province").addEventListener("change",filterOpportunities);
+document
+.getElementById("search")
+.addEventListener(
+"input",
+filterOpportunities
+);
+
+document
+.getElementById("type")
+.addEventListener(
+"change",
+filterOpportunities
+);
+
+document
+.getElementById("province")
+.addEventListener(
+"change",
+filterOpportunities
+);
 
 loadOpportunities();
 
