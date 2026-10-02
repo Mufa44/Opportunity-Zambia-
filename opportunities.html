@@ -139,9 +139,13 @@ margin-top:50px;
 
 <header>
 
-<div class="logo">🇿🇲 Opportunity Zambia</div>
+<div class="logo">
+🇿🇲 Opportunity Zambia
+</div>
 
-<a href="index.html">← Home</a>
+<a href="index.html">
+← Home
+</a>
 
 </header>
 
@@ -168,17 +172,11 @@ placeholder="🔎 Search opportunities..."
 <select id="type">
 
 <option value="">All opportunity types</option>
-
 <option>Job</option>
-
 <option>Internship</option>
-
 <option>Apprenticeship</option>
-
 <option>Training</option>
-
 <option>Business Opportunity</option>
-
 <option>Freelance Work</option>
 
 </select>
@@ -186,25 +184,15 @@ placeholder="🔎 Search opportunities..."
 <select id="province">
 
 <option value="">All provinces</option>
-
 <option>Lusaka</option>
-
 <option>Copperbelt</option>
-
 <option>Central</option>
-
 <option>Eastern</option>
-
 <option>Luapula</option>
-
 <option>Northern</option>
-
 <option>Muchinga</option>
-
 <option>North-Western</option>
-
 <option>Southern</option>
-
 <option>Western</option>
 
 </select>
@@ -244,29 +232,45 @@ async function loadOpportunities(){
 try{
 
 const response = await fetch(
+
 SUPABASE_URL +
 "/rest/v1/opportunities?select=*&order=created_at.desc",
+
 {
+
 headers:{
+
 "apikey":SUPABASE_KEY,
-"Authorization":"Bearer " + SUPABASE_KEY
+
+"Authorization":
+"Bearer " + SUPABASE_KEY
+
 }
+
 }
+
 );
 
 if(!response.ok){
 
-throw new Error("Could not load opportunities");
+throw new Error(
+"Could not load opportunities"
+);
 
 }
 
-allOpportunities = await response.json();
+allOpportunities =
+await response.json();
 
-displayOpportunities(allOpportunities);
+displayOpportunities(
+allOpportunities
+);
 
 }catch(error){
 
-document.getElementById("message").textContent =
+document.getElementById(
+"message"
+).textContent =
 "❌ Could not load opportunities.";
 
 }
@@ -276,10 +280,14 @@ document.getElementById("message").textContent =
 function displayOpportunities(list){
 
 const container =
-document.getElementById("opportunities");
+document.getElementById(
+"opportunities"
+);
 
 const message =
-document.getElementById("message");
+document.getElementById(
+"message"
+);
 
 container.innerHTML = "";
 
@@ -292,8 +300,6 @@ return;
 
 }
 
-/* FIXED WORDING */
-
 message.textContent =
 list.length +
 " opportunit" +
@@ -305,7 +311,8 @@ list.forEach(item => {
 const card =
 document.createElement("div");
 
-card.className = "card";
+card.className =
+"card";
 
 card.innerHTML = `
 
@@ -341,15 +348,16 @@ ${escapeHTML(item.requirements || "")}
 
 <p>
 <strong>Deadline:</strong>
-${escapeHTML(item.deadline || "Not specified")}
+${escapeHTML(
+item.deadline || "Not specified"
+)}
 </p>
 
 <a
 class="apply"
-href="${safeURL(item.application_link)}"
-target="_blank"
+href="apply.html?id=${encodeURIComponent(item.id)}"
 >
-Apply / Learn More
+🚀 Apply Now
 </a>
 
 `;
@@ -363,17 +371,19 @@ container.appendChild(card);
 function filterOpportunities(){
 
 const search =
-document.getElementById("search")
-.value
-.toLowerCase();
+document.getElementById(
+"search"
+).value.toLowerCase();
 
 const type =
-document.getElementById("type")
-.value;
+document.getElementById(
+"type"
+).value;
 
 const province =
-document.getElementById("province")
-.value;
+document.getElementById(
+"province"
+).value;
 
 const filtered =
 allOpportunities.filter(item => {
@@ -390,23 +400,30 @@ const text =
 
 return (
 
-text.toLowerCase().includes(search)
+text.toLowerCase()
+.includes(search)
 
 &&
 
-(type === "" ||
-item.opportunity_type === type)
+(
+type === "" ||
+item.opportunity_type === type
+)
 
 &&
 
-(province === "" ||
-item.location === province)
+(
+province === "" ||
+item.location === province
+)
 
 );
 
 });
 
-displayOpportunities(filtered);
+displayOpportunities(
+filtered
+);
 
 }
 
@@ -415,39 +432,10 @@ function escapeHTML(text){
 return String(text)
 
 .replace(/&/g,"&amp;")
-
 .replace(/</g,"&lt;")
-
 .replace(/>/g,"&gt;")
-
 .replace(/"/g,"&quot;")
-
 .replace(/'/g,"&#039;");
-
-}
-
-function safeURL(url){
-
-if(!url || url === "#")
-return "#";
-
-try{
-
-const parsed =
-new URL(url);
-
-if(
-parsed.protocol === "http:" ||
-parsed.protocol === "https:"
-){
-
-return parsed.href;
-
-}
-
-}catch(e){}
-
-return "#";
 
 }
 
