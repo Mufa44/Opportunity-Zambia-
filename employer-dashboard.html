@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Dashboard | Opportunity Zambia 🇿🇲</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4fff8;
+      color: #222;
+    }
+
+    header {
+      background: #087f3f;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #087f3f;
+      text-align: center;
+    }
+
+    .welcome {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .action {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .action h2 {
+      color: #087f3f;
+      font-size: 20px;
+    }
+
+    .action a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 11px 18px;
+      background: #087f3f;
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      color: #087f3f;
+      margin-top: 0;
+    }
+
+    .opportunity {
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      padding: 15px;
+      margin-top: 12px;
+    }
+
+    .opportunity h3 {
+      margin-top: 0;
+      color: #087f3f;
+    }
+
+    .empty {
+      color: #777;
+      text-align: center;
+      padding: 15px;
+    }
+
+    #message {
+      text-align: center;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .error {
+      display: block !important;
+      background: #ffe1e1;
+      color: #b00020;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">← Opportunity Zambia 🇿🇲</a>
+</header>
+
+<div class="container">
+
+  <h1>Employer Dashboard</h1>
+
+  <p class="welcome">
+    Manage your organization and opportunities from one place.
+  </p>
+
+  <div id="message"></div>
+
+  <div class="actions">
+
+    <div class="action">
+      <h2>🏢 Company Profile</h2>
+      <p>Update your organization information.</p>
+      <a href="employer-profile.html">View Profile</a>
+    </div>
+
+    <div class="action">
+      <h2>📢 Post Opportunity</h2>
+      <p>Find young Zambian talent.</p>
+      <a href="post-opportunity.html">Post Opportunity</a>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>📋 My Opportunities</h2>
+
+    <div id="opportunities">
+      Loading your opportunities...
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+
+const token =
+  localStorage.getItem("oz_access_token");
+
+const userId =
+  localStorage.getItem("oz_user_id");
+
+const opportunitiesBox =
+  document.getElementById("opportunities");
+
+const message =
+  document.getElementById("message");
+
+
+function showError(text) {
+  message.textContent = text;
+  message.className = "error";
+}
+
+
+async function loadOpportunities() {
+
+  if (!token || !userId) {
+
+    showError(
+      "⚠️ Please login with your employer account first."
+    );
+
+    opportunitiesBox.innerHTML = "";
+    return;
+  }
+
+  try {
+
+    const url =
+      SUPABASE_URL +
+      "/rest/v1/opportunities" +
+      "?select=*" +
+      "&employer_id=eq." +
+      encodeURIComponent(userId) +
+      "&order=created_at.desc";
+
+    const response = await fetch(url, {
+
+      method: "GET",
+
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + token
+      }
+
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        data.msg ||
+        data.hint ||
+        "Could not load opportunities."
+      );
+    }
+
+    if (!data.length) {
+
+      opportunitiesBox.innerHTML = `
+        <div class="empty">
+          You have not posted any opportunities yet.
+          <br><br>
+          Tap <b>Post Opportunity</b> above to create your first one.
+        </div>
+      `;
+
+      return;
+    }
+
+    opportunitiesBox.innerHTML = "";
+
+    data.forEach(function(opportunity) {
+
+      const item =
+        document.createElement("div");
+
+      item.className = "opportunity";
+
+      item.innerHTML = `
+        <h3>${escapeHtml(opportunity.title || "Untitled")}</h3>
+
+        <p>
+          <b>Type:</b>
+          ${escapeHtml(opportunity.opportunity_type || "Not specified")}
+        </p>
+
+        <p>
+          <b>Location:</b>
+          ${escapeHtml(opportunity.location || "Not specified")}
+        </p>
+
+        <p>
+          <b>Status:</b>
+          ${escapeHtml(opportunity.status || "active")}
+        </p>
+
+        <p>
+          <b>Applications:</b>
+          Applications will appear here as the system is expanded.
+        </p>
+      `;
+
+      opportunitiesBox.appendChild(item);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    showError(
+      "❌ Could not load your opportunities: " +
+      error.message
+    );
+
+    opportunitiesBox.innerHTML = "";
+  }
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+loadOpportunities();
+
+</script>
+
+</body>
+</html>
