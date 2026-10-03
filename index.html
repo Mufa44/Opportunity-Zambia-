@@ -4,180 +4,515 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Opportunity Zambia 🇿🇲 | Learn • Build • Work • Earn</title>
+<title>Opportunity Zambia 🇿🇲 | Where Hope Finds a Way</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
+*{
+box-sizing:border-box;
 margin:0;
-font-family:Arial,sans-serif;
-background:#f4f8f5;
-color:#17231a;
+padding:0;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f5faf7;
+color:#14231a;
+line-height:1.6;
+}
+
+/* ================= HEADER ================= */
+
 header{
-background:#087f3f;
-color:white;
-padding:18px 6%;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+z-index:10;
+padding:22px 6%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:20px;
 }
 
 .logo{
-font-size:23px;
-font-weight:800;
+font-size:24px;
+font-weight:900;
+color:white;
+letter-spacing:.3px;
 }
 
 nav{
 display:flex;
-gap:18px;
-flex-wrap:wrap;
+gap:20px;
+align-items:center;
 }
 
 nav a{
 color:white;
 text-decoration:none;
 font-weight:bold;
+font-size:15px;
 }
 
 nav a:hover{
-text-decoration:underline;
+opacity:.8;
 }
 
+/* ================= HERO ================= */
+
 .hero{
-background:linear-gradient(135deg,#087f3f,#0aa957);
-color:white;
+min-height:760px;
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
-padding:75px 20px;
+color:white;
+padding:120px 20px 80px;
+
+background:
+linear-gradient(
+135deg,
+rgba(3,62,31,.94),
+rgba(5,126,61,.88),
+rgba(9,169,87,.78)
+);
+}
+
+/* Zambia-inspired background shapes */
+
+.hero:before{
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+border-radius:50%;
+background:rgba(255,255,255,.07);
+top:-300px;
+right:-180px;
+}
+
+.hero:after{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+border-radius:50%;
+background:rgba(255,184,0,.08);
+bottom:-250px;
+left:-150px;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:950px;
+}
+
+.hero-badge{
+display:inline-block;
+background:rgba(255,255,255,.14);
+border:1px solid rgba(255,255,255,.3);
+padding:9px 18px;
+border-radius:30px;
+font-size:14px;
+font-weight:bold;
+margin-bottom:25px;
+backdrop-filter:blur(5px);
 }
 
 .hero h1{
-font-size:clamp(38px,8vw,65px);
-margin:0 0 20px;
+font-size:clamp(42px,8vw,76px);
+line-height:1.05;
+margin-bottom:22px;
+font-weight:900;
+}
+
+.hero h1 span{
+color:#ffd23f;
+}
+
+.hero h2{
+font-size:clamp(25px,4vw,42px);
+margin-bottom:22px;
+font-weight:800;
 }
 
 .hero p{
-max-width:700px;
+max-width:760px;
 margin:auto;
 font-size:19px;
-line-height:1.7;
+line-height:1.8;
+color:#eefaf2;
 }
 
+/* ================= BUTTONS ================= */
+
 .buttons{
-margin-top:30px;
 display:flex;
 justify-content:center;
-gap:15px;
+align-items:center;
+gap:14px;
 flex-wrap:wrap;
+margin-top:32px;
 }
 
 .button{
 display:inline-block;
-padding:15px 22px;
+padding:15px 24px;
 border-radius:10px;
 text-decoration:none;
-font-weight:bold;
+font-weight:800;
 font-size:16px;
+transition:.2s;
+}
+
+.button:hover{
+transform:translateY(-2px);
 }
 
 .primary{
 background:white;
 color:#087f3f;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 .secondary{
 border:2px solid white;
 color:white;
+background:transparent;
 }
+
+/* ================= LOGIN BOX ================= */
+
+.login-box{
+margin:35px auto 0;
+max-width:470px;
+background:rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.25);
+padding:22px;
+border-radius:18px;
+backdrop-filter:blur(8px);
+}
+
+.login-box p{
+font-size:15px;
+margin-bottom:14px;
+color:white;
+}
+
+.login-button{
+display:block;
+width:100%;
+background:#ffd23f;
+color:#17351f;
+padding:15px;
+border-radius:10px;
+text-decoration:none;
+font-weight:900;
+font-size:17px;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+background:white;
+padding:70px 20px;
+text-align:center;
+}
+
+.intro-content{
+max-width:850px;
+margin:auto;
+}
+
+.intro h2{
+font-size:36px;
+color:#087f3f;
+margin-bottom:18px;
+}
+
+.intro p{
+font-size:18px;
+color:#526057;
+}
+
+/* ================= OPPORTUNITIES ================= */
 
 .section{
-max-width:1100px;
-margin:55px auto;
-padding:0 20px;
+max-width:1150px;
+margin:auto;
+padding:75px 20px;
 }
 
-.section h2{
+.section-title{
 text-align:center;
+margin-bottom:45px;
+}
+
+.section-title h2{
+font-size:36px;
 color:#087f3f;
-font-size:32px;
-margin-bottom:35px;
+margin-bottom:10px;
+}
+
+.section-title p{
+color:#64736a;
+font-size:17px;
 }
 
 .cards{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:22px;
+gap:24px;
 }
 
 .card{
 background:white;
-padding:28px;
-border-radius:16px;
-box-shadow:0 5px 20px rgba(0,0,0,.07);
-text-align:center;
+padding:30px;
+border-radius:18px;
+box-shadow:0 8px 30px rgba(0,0,0,.07);
+border:1px solid #e6eee9;
+transition:.25s;
 }
 
-.card .icon{
-font-size:42px;
-margin-bottom:15px;
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 35px rgba(0,0,0,.1);
+}
+
+.icon{
+width:62px;
+height:62px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:31px;
+background:#e9f8ef;
+border-radius:16px;
+margin-bottom:20px;
 }
 
 .card h3{
+font-size:21px;
 color:#087f3f;
+margin-bottom:10px;
 }
 
 .card p{
-line-height:1.6;
-color:#526057;
+color:#5b6860;
+margin-bottom:20px;
 }
 
-.cta{
-background:#087f3f;
+.card a{
+color:#087f3f;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+background:#063d21;
 color:white;
+padding:75px 20px;
+}
+
+.category-grid{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:15px;
+}
+
+.category{
 text-align:center;
-padding:55px 20px;
+padding:25px 10px;
+border:1px solid rgba(255,255,255,.15);
+border-radius:14px;
+background:rgba(255,255,255,.05);
+}
+
+.category-icon{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.category strong{
+display:block;
+font-size:14px;
+}
+
+/* ================= MOVEMENT ================= */
+
+.movement{
+padding:85px 20px;
+background:#f0f8f3;
+}
+
+.movement-content{
+max-width:1000px;
+margin:auto;
+text-align:center;
+}
+
+.movement h2{
+font-size:40px;
+color:#087f3f;
+margin-bottom:20px;
+}
+
+.movement p{
+font-size:18px;
+color:#526057;
+max-width:800px;
+margin:0 auto 25px;
+}
+
+.quote{
+font-size:25px;
+font-weight:800;
+color:#17351f;
+margin-top:30px;
+}
+
+/* ================= FINAL CTA ================= */
+
+.cta{
+padding:80px 20px;
+text-align:center;
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#087f3f,
+#0aa957
+);
 }
 
 .cta h2{
-font-size:34px;
-margin-top:0;
+font-size:40px;
+margin-bottom:15px;
 }
 
+.cta p{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.cta .buttons{
+margin-top:25px;
+}
+
+/* ================= FOOTER ================= */
+
 footer{
-background:#063d21;
+background:#032b17;
 color:white;
 text-align:center;
-padding:30px 20px;
+padding:35px 20px;
+}
+
+.footer-logo{
+font-size:22px;
+font-weight:900;
+margin-bottom:15px;
 }
 
 .footer-links{
-margin:15px 0;
 display:flex;
 justify-content:center;
-gap:20px;
+gap:22px;
 flex-wrap:wrap;
+margin:15px 0 25px;
 }
 
 .footer-links a{
 color:white;
 text-decoration:none;
+font-size:14px;
 }
 
-@media(max-width:750px){
+.footer-links a:hover{
+text-decoration:underline;
+}
+
+.tagline{
+color:#a8cdb5;
+font-size:14px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
 
 header{
-flex-direction:column;
+position:absolute;
+padding:18px 20px;
+}
+
+nav{
+display:none;
+}
+
+.hero{
+min-height:700px;
+padding:110px 20px 60px;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.hero h2{
+font-size:28px;
+}
+
+.hero p{
+font-size:17px;
 }
 
 .cards{
 grid-template-columns:1fr;
 }
 
-.hero{
-padding:55px 20px;
+.category-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.intro h2,
+.section-title h2,
+.movement h2,
+.cta h2{
+font-size:30px;
+}
+
+}
+
+@media(max-width:450px){
+
+.hero h1{
+font-size:39px;
+}
+
+.category-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.login-box{
+padding:18px;
+}
+
+.button{
+width:100%;
+text-align:center;
 }
 
 }
@@ -185,6 +520,8 @@ padding:55px 20px;
 </head>
 
 <body>
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -195,57 +532,195 @@ padding:55px 20px;
 <nav>
 <a href="index.html">Home</a>
 <a href="opportunities.html">Opportunities</a>
-<a href="profile.html">Create Profile</a>
+<a href="profile.html">Profile</a>
 <a href="post-opportunity.html">Post Opportunity</a>
-<a href="auth.html">🔐 Login / Sign Up</a>
 </nav>
 
 </header>
 
 
+<!-- ================= HERO ================= -->
+
 <section class="hero">
 
-<h1>Opportunity Zambia 🇿🇲</h1>
+<div class="hero-content">
+
+<div class="hero-badge">
+🇿🇲 Built for Zambia's Next Generation
+</div>
+
+<h1>
+Welcome to <span>Opportunity Zambia</span>
+</h1>
+
+<h2>
+Where Hope Finds a Way.
+</h2>
 
 <p>
-Connecting young Zambians with opportunities to
-learn, build, work, earn, create and connect.
+A place where young Zambians can discover opportunities,
+show their skills, build their future and connect with
+people and organisations that believe in their potential.
 </p>
 
 <div class="buttons">
 
 <a class="button primary" href="opportunities.html">
-🔎 Find Opportunities
+🔎 Find Your Opportunity
 </a>
 
 <a class="button secondary" href="profile.html">
-👤 Create Your Profile
+👤 Build Your Profile
 </a>
+
+</div>
+
+
+<!-- LOGIN IN THE MIDDLE -->
+
+<div class="login-box">
+
+<p>
+Already have an account? Or ready to join Opportunity Zambia?
+</p>
+
+<a class="login-button" href="auth.html">
+🔐 Login / Sign Up
+</a>
+
+</div>
 
 </div>
 
 </section>
 
 
+<!-- ================= INTRO ================= -->
+
+<section class="intro">
+
+<div class="intro-content">
+
+<h2>
+Your Future Starts With an Opportunity.
+</h2>
+
+<p>
+Opportunity Zambia was created to make it easier for young
+Zambians to find genuine opportunities and turn their skills,
+ideas and ambition into something real.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= WHAT WE DO ================= -->
+
 <section class="section">
 
-<h2>What You Can Do</h2>
+<div class="section-title">
+
+<h2>
+More Than Just Jobs
+</h2>
+
+<p>
+Discover different ways to learn, build, work and earn.
+</p>
+
+</div>
+
 
 <div class="cards">
 
+
 <div class="card">
 
-<div class="icon">🔎</div>
+<div class="icon">💼</div>
 
-<h3>Find Opportunities</h3>
+<h3>Jobs</h3>
 
 <p>
-Discover jobs, internships, apprenticeships,
-training and other opportunities across Zambia.
+Find genuine employment opportunities from organisations
+looking for people with the right skills.
 </p>
 
-<a class="button primary" href="opportunities.html">
-Explore Opportunities
+<a href="opportunities.html">
+Explore Jobs →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🎓</div>
+
+<h3>Education & Training</h3>
+
+<p>
+Discover training, learning opportunities and programmes
+that can help you develop valuable skills.
+</p>
+
+<a href="opportunities.html">
+Find Training →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🛠️</div>
+
+<h3>Apprenticeships</h3>
+
+<p>
+Gain practical experience, learn from others and develop
+skills that can help you enter the world of work.
+</p>
+
+<a href="opportunities.html">
+Find Apprenticeships →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🚀</div>
+
+<h3>Business & Freelance</h3>
+
+<p>
+Find ways to turn your ideas, talents and skills into
+income and new opportunities.
+</p>
+
+<a href="opportunities.html">
+Explore Opportunities →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💻</div>
+
+<h3>Technology</h3>
+
+<p>
+Discover technology opportunities and build skills for
+the changing digital world.
+</p>
+
+<a href="opportunities.html">
+Explore Technology →
 </a>
 
 </div>
@@ -255,33 +730,15 @@ Explore Opportunities
 
 <div class="icon">👤</div>
 
-<h3>Create Your Profile</h3>
+<h3>Your Profile</h3>
 
 <p>
-Showcase your skills, education and experience
-so organisations can discover your potential.
+Showcase who you are, what you can do and what you want
+to achieve.
 </p>
 
-<a class="button primary" href="profile.html">
-Create Profile
-</a>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">🏢</div>
-
-<h3>Post an Opportunity</h3>
-
-<p>
-Organisations can share genuine jobs, internships,
-apprenticeships and training opportunities.
-</p>
-
-<a class="button primary" href="post-opportunity.html">
-Post Opportunity
+<a href="profile.html">
+Build Your Profile →
 </a>
 
 </div>
@@ -291,22 +748,110 @@ Post Opportunity
 </section>
 
 
-<section class="cta">
+<!-- ================= CATEGORIES ================= -->
 
-<h2>Build Your Future in Zambia 🇿🇲</h2>
+<section class="categories">
+
+<div class="section-title">
+
+<h2 style="color:white;">
+One Platform. Many Possibilities.
+</h2>
+
+<p style="color:#cde7d5;">
+Whatever your goal, there may be a path forward.
+</p>
+
+</div>
+
+
+<div class="category-grid">
+
+<div class="category">
+<div class="category-icon">💼</div>
+<strong>Jobs</strong>
+</div>
+
+<div class="category">
+<div class="category-icon">🎓</div>
+<strong>Education</strong>
+</div>
+
+<div class="category">
+<div class="category-icon">🛠️</div>
+<strong>Apprenticeships</strong>
+</div>
+
+<div class="category">
+<div class="category-icon">🚀</div>
+<strong>Entrepreneurship</strong>
+</div>
+
+<div class="category">
+<div class="category-icon">💻</div>
+<strong>Technology</strong>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MOVEMENT ================= -->
+
+<section class="movement">
+
+<div class="movement-content">
+
+<h2>
+This Is About More Than Finding a Job.
+</h2>
 
 <p>
-Your skills can open doors. Your opportunity could be next.
+It's about giving young people a place to discover what is
+possible, develop their abilities and take the next step
+towards the future they want.
+</p>
+
+<p>
+Whether you are looking for your first opportunity,
+building a skill, starting a business or searching for
+talent, Opportunity Zambia is here to connect the pieces.
+</p>
+
+<div class="quote">
+“Learn → Build → Work → Earn → Create → Connect.”
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+<h2>
+Your Opportunity Could Be Next. 🇿🇲
+</h2>
+
+<p>
+Don't wait for your future to find you.
+</p>
+
+<p>
+Start looking. Start building. Start connecting.
 </p>
 
 <div class="buttons">
 
-<a class="button primary" href="profile.html">
-🚀 Start Your Profile
+<a class="button primary" href="opportunities.html">
+🔎 Find Opportunities
 </a>
 
-<a class="button secondary" href="opportunities.html">
-Explore Opportunities
+<a class="button secondary" href="profile.html">
+🚀 Build Your Profile
 </a>
 
 </div>
@@ -314,9 +859,13 @@ Explore Opportunities
 </section>
 
 
+<!-- ================= FOOTER ================= -->
+
 <footer>
 
-<strong>🇿🇲 Opportunity Zambia</strong>
+<div class="footer-logo">
+🇿🇲 Opportunity Zambia
+</div>
 
 <div class="footer-links">
 
@@ -328,11 +877,15 @@ Explore Opportunities
 
 </div>
 
+<div class="tagline">
 Learn → Build → Work → Earn → Create → Connect
+</div>
 
-<br><br>
+<br>
 
+<div class="tagline">
 © 2026 Opportunity Zambia
+</div>
 
 </footer>
 
