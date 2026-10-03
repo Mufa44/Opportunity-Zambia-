@@ -6,9 +6,7 @@
   <title>Post Opportunity | Opportunity Zambia 🇿🇲</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -39,7 +37,7 @@
       background: white;
       padding: 28px;
       border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
     }
 
     h1 {
@@ -59,9 +57,7 @@
       margin-bottom: 7px;
     }
 
-    input,
-    textarea,
-    select {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -114,7 +110,6 @@
 </header>
 
 <div class="container">
-
   <div class="card">
 
     <h1>📢 Post an Opportunity</h1>
@@ -125,38 +120,27 @@
 
     <form id="opportunityForm">
 
-      <label for="title">Opportunity Title *</label>
-      <input
-        type="text"
-        id="title"
-        placeholder="e.g. Driver"
-        required
-      >
+      <label>Opportunity Title *</label>
+      <input id="title" type="text" placeholder="e.g. Driver" required>
 
-      <label for="description">Description *</label>
-      <textarea
-        id="description"
+      <label>Description *</label>
+      <textarea id="description"
         placeholder="Describe the opportunity..."
-        required
-      ></textarea>
+        required></textarea>
 
-      <label for="organization">Company / Organization *</label>
-      <input
+      <label>Company / Organization *</label>
+      <input id="organization"
         type="text"
-        id="organization"
         placeholder="Company name"
-        required
-      >
+        required>
 
-      <label for="location">Location *</label>
-      <input
+      <label>Location *</label>
+      <input id="location"
         type="text"
-        id="location"
         placeholder="e.g. Lusaka"
-        required
-      >
+        required>
 
-      <label for="opportunity_type">Opportunity Type *</label>
+      <label>Opportunity Type *</label>
       <select id="opportunity_type" required>
         <option value="">Select type</option>
         <option value="Job">Job</option>
@@ -167,42 +151,30 @@
         <option value="Freelance Work">Freelance Work</option>
       </select>
 
-      <label for="category">Category</label>
-      <input
+      <label>Category</label>
+      <input id="category"
         type="text"
-        id="category"
-        placeholder="e.g. Technology, Driving, Sales"
-      >
+        placeholder="e.g. Technology, Driving, Sales">
 
-      <label for="requirements">Requirements</label>
-      <textarea
-        id="requirements"
-        placeholder="What skills or qualifications are required?"
-      ></textarea>
+      <label>Requirements</label>
+      <textarea id="requirements"
+        placeholder="What skills or qualifications are required?"></textarea>
 
-      <label for="application_link">Application Link</label>
-      <input
+      <label>Application Link</label>
+      <input id="application_link"
         type="url"
-        id="application_link"
-        placeholder="https://..."
-      >
+        placeholder="https://...">
 
-      <label for="deadline">Application Deadline</label>
-      <input
-        type="date"
-        id="deadline"
-      >
+      <label>Application Deadline</label>
+      <input id="deadline" type="date">
 
-      <button type="submit">
-        🚀 Post Opportunity
-      </button>
+      <button type="submit">🚀 Post Opportunity</button>
 
     </form>
 
     <div id="message"></div>
 
   </div>
-
 </div>
 
 <footer>
@@ -210,106 +182,27 @@
 </footer>
 
 <script>
-  const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-  const token = localStorage.getItem("oz_access_token");
-  const userId = localStorage.getItem("oz_user_id");
+const SUPABASE_URL =
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
 
-  const form = document.getElementById("opportunityForm");
-  const message = document.getElementById("message");
+const SUPABASE_KEY =
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-  if (!token || !userId) {
-    message.style.display = "block";
-    message.style.background = "#ffe5e5";
-    message.style.color = "#b00020";
-    message.innerHTML =
-      "Please log in to an employer account before posting an opportunity.";
-    form.style.display = "none";
-  }
+const token =
+  localStorage.getItem("oz_access_token");
 
-  form.addEventListener("submit", async function(event) {
+const form =
+  document.getElementById("opportunityForm");
 
-    event.preventDefault();
+const message =
+  document.getElementById("message");
 
-    message.style.display = "block";
-    message.style.background = "#fff3cd";
-    message.style.color = "#856404";
-    message.innerHTML = "Posting your opportunity...";
+let currentUser = null;
 
-    const opportunity = {
-      title: document.getElementById("title").value.trim(),
-      description: document.getElementById("description").value.trim(),
-      organization: document.getElementById("organization").value.trim(),
-      location: document.getElementById("location").value.trim(),
-      opportunity_type: document.getElementById("opportunity_type").value,
-      category: document.getElementById("category").value.trim(),
-      requirements: document.getElementById("requirements").value.trim(),
-      application_link: document.getElementById("application_link").value.trim() || null,
-      deadline: document.getElementById("deadline").value || null,
 
-      /* THIS CONNECTS THE OPPORTUNITY TO THE EMPLOYER */
-      employer_id: userId,
-
-      /* New opportunities start active and unverified */
-      verified: false,
-      status: "active"
-    };
-
-    try {
-
-      const response = await fetch(
-        SUPABASE_URL + "/rest/v1/opportunities",
-        {
-          method: "POST",
-
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + token,
-            "Content-Type": "application/json",
-            "Prefer": "return=representation"
-          },
-
-          body: JSON.stringify(opportunity)
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message ||
-          data.error_description ||
-          "Could not post opportunity."
-        );
-      }
-
-      message.style.background = "#d4edda";
-      message.style.color = "#155724";
-
-      message.innerHTML =
-        "🎉 Opportunity posted successfully! 🇿🇲<br><br>" +
-        "Your opportunity has been added to Opportunity Zambia.";
-
-      form.reset();
-
-      setTimeout(function() {
-        window.location.href = "employer-dashboard.html";
-      }, 1500);
-
-    } catch (error) {
-
-      console.error(error);
-
-      message.style.background = "#ffe5e5";
-      message.style.color = "#b00020";
-
-      message.innerHTML =
-        "❌ " + error.message;
-    }
-
-  });
-</script>
-
-</body>
-</html>
+/* Show message */
+function showMessage(text, background, color) {
+  message.style.display = "block";
+  message.style.background = background;
+  message.style.color = color
