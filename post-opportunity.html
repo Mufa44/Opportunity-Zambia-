@@ -97,6 +97,7 @@
       padding: 12px;
       border-radius: 8px;
       display: none;
+      line-height: 1.5;
     }
 
     footer {
@@ -129,18 +130,21 @@
       <input id="title" type="text" placeholder="e.g. Driver" required>
 
       <label>Description *</label>
-      <textarea id="description"
+      <textarea
+        id="description"
         placeholder="Describe the opportunity..."
         required></textarea>
 
       <label>Company / Organization *</label>
-      <input id="organization"
+      <input
+        id="organization"
         type="text"
         placeholder="Company name"
         required>
 
       <label>Location *</label>
-      <input id="location"
+      <input
+        id="location"
         type="text"
         placeholder="e.g. Lusaka"
         required>
@@ -157,16 +161,19 @@
       </select>
 
       <label>Category</label>
-      <input id="category"
+      <input
+        id="category"
         type="text"
         placeholder="e.g. Technology, Driving, Sales">
 
       <label>Requirements</label>
-      <textarea id="requirements"
+      <textarea
+        id="requirements"
         placeholder="What skills or qualifications are required?"></textarea>
 
       <label>Application Link</label>
-      <input id="application_link"
+      <input
+        id="application_link"
         type="url"
         placeholder="https://...">
 
@@ -196,9 +203,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-const token =
-  localStorage.getItem("oz_access_token");
-
 const form =
   document.getElementById("opportunityForm");
 
@@ -208,10 +212,14 @@ const message =
 const submitButton =
   document.getElementById("submitButton");
 
+let accessToken = null;
 let currentUser = null;
 
 
-/* Show message */
+/* =========================
+   MESSAGE
+========================= */
+
 function showMessage(text, background, color) {
   message.style.display = "block";
   message.style.background = background;
@@ -220,22 +228,98 @@ function showMessage(text, background, color) {
 }
 
 
-/* Check login */
-if (!token) {
-  showMessage(
-    "❌ Please log in as an employer first.",
-    "#ffe5e5",
-    "#b00020"
-  );
+/* =========================
+   REFRESH LOGIN SESSION
+========================= */
 
-  submitButton.disabled = true;
+async function refreshSession() {
+
+  const refreshToken =
+    localStorage.getItem("oz_refresh_token");
+
+  const oldToken =
+    localStorage.getItem("oz_access_token");
+
+  if (!refreshToken) {
+    accessToken = oldToken;
+    return !!accessToken;
+  }
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=refresh_token",
+      {
+        method: "POST",
+
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          refresh_token: refreshToken
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Refresh error:", data);
+      accessToken = oldToken;
+      return !!accessToken;
+    }
+
+    accessToken = data.access_token;
+
+    if (data.refresh_token) {
+      localStorage.setItem(
+        "oz_refresh_token",
+        data.refresh_token
+      );
+    }
+
+    localStorage.setItem(
+      "oz_access_token",
+      data.access_token
+    );
+
+    return true;
+
+  } catch (error) {
+
+    console.error("Session refresh error:", error);
+
+    accessToken = oldToken;
+
+    return !!accessToken;
+  }
 }
 
 
-/* Load logged-in user */
+/* =========================
+   GET CURRENT USER
+========================= */
+
 async function loadUser() {
 
-  if (!token) return;
+  const loggedIn =
+    await refreshSession();
+
+  if (!loggedIn) {
+
+    showMessage(
+      "❌ Please log in as an employer first.",
+      "#ffe5e5",
+      "#b00020"
+    );
+
+    submitButton.disabled = true;
+
+    return false;
+  }
 
   try {
 
@@ -243,9 +327,10 @@ async function loadUser() {
       SUPABASE_URL + "/auth/v1/user",
       {
         method: "GET",
+
         headers: {
           "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + token
+          "Authorization": "Bearer " + accessToken
         }
       }
     );
@@ -253,7 +338,11 @@ async function loadUser() {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || data.error_description || "Login session expired.");
+      throw new Error(
+        data.message ||
+        data.error_description ||
+        "Unable to verify your login."
+      );
     }
 
     currentUser = data;
@@ -263,9 +352,16 @@ async function loadUser() {
       currentUser.id
     );
 
+    console.log(
+      "Logged-in employer ID:",
+      currentUser.id
+    );
+
+    return true;
+
   } catch (error) {
 
-    console.error(error);
+    console.error("User error:", error);
 
     showMessage(
       "❌ Your login session has expired. Please log in again.",
@@ -274,137 +370,213 @@ async function loadUser() {
     );
 
     submitButton.disabled = true;
+
+    return false;
   }
 }
 
 
-/* Submit opportunity */
-form.addEventListener("submit", async function(event) {
+/* =========================
+   POST OPPORTUNITY
+========================= */
 
-  event.preventDefault();
+form.addEventListener(
+  "submit",
+  async function(event) {
 
-  if (!currentUser) {
+    event.preventDefault();
 
-    showMessage(
-      "❌ Please log in as an employer first.",
-      "#ffe5e5",
-      "#b00020"
-    );
+    if (!currentUser) {
 
-    return;
-  }
-
-  submitButton.disabled = true;
-  submitButton.textContent = "⏳ Posting...";
-
-  const opportunity = {
-
-    employer_id: currentUser.id,
-
-    title: document.getElementById("title").value.trim(),
-
-    description:
-      document.getElementById("description").value.trim(),
-
-    organization:
-      document.getElementById("organization").value.trim(),
-
-    location:
-      document.getElementById("location").value.trim(),
-
-    opportunity_type:
-      document.getElementById("opportunity_type").value,
-
-    category:
-      document.getElementById("category").value.trim(),
-
-    requirements:
-      document.getElementById("requirements").value.trim(),
-
-    application_link:
-      document.getElementById("application_link").value.trim() || null,
-
-    deadline:
-      document.getElementById("deadline").value || null,
-
-    verified: false,
-
-    status: "active"
-  };
-
-
-  try {
-
-    const response = await fetch(
-      SUPABASE_URL + "/rest/v1/opportunities",
-      {
-        method: "POST",
-
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + token,
-          "Content-Type": "application/json",
-          "Prefer": "return=representation"
-        },
-
-        body: JSON.stringify(opportunity)
-      }
-    );
-
-
-    const result = await response.json();
-
-
-    if (!response.ok) {
-
-      console.error("Supabase error:", result);
-
-      throw new Error(
-        result.message ||
-        result.details ||
-        result.hint ||
-        result.error_description ||
-        "Could not post opportunity."
+      showMessage(
+        "❌ Please log in as an employer first.",
+        "#ffe5e5",
+        "#b00020"
       );
+
+      return;
     }
 
+    submitButton.disabled = true;
+    submitButton.textContent = "⏳ Posting...";
 
-    showMessage(
-      "🎉 Opportunity posted successfully! 🇿🇲",
-      "#dff7e8",
-      "#087f3f"
+
+    const opportunity = {
+
+      employer_id: currentUser.id,
+
+      title:
+        document
+          .getElementById("title")
+          .value
+          .trim(),
+
+      description:
+        document
+          .getElementById("description")
+          .value
+          .trim(),
+
+      organization:
+        document
+          .getElementById("organization")
+          .value
+          .trim(),
+
+      location:
+        document
+          .getElementById("location")
+          .value
+          .trim(),
+
+      opportunity_type:
+        document
+          .getElementById("opportunity_type")
+          .value,
+
+      category:
+        document
+          .getElementById("category")
+          .value
+          .trim(),
+
+      requirements:
+        document
+          .getElementById("requirements")
+          .value
+          .trim(),
+
+      application_link:
+        document
+          .getElementById("application_link")
+          .value
+          .trim() || null,
+
+      deadline:
+        document
+          .getElementById("deadline")
+          .value || null,
+
+      verified: false,
+
+      status: "active"
+    };
+
+
+    console.log(
+      "Posting with employer_id:",
+      opportunity.employer_id
     );
 
 
-    form.reset();
+    try {
+
+      const response = await fetch(
+        SUPABASE_URL +
+        "/rest/v1/opportunities",
+        {
+          method: "POST",
+
+          headers: {
+            "apikey": SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " + accessToken,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+          },
+
+          body:
+            JSON.stringify(opportunity)
+        }
+      );
 
 
-    setTimeout(function() {
+      const text =
+        await response.text();
 
-      window.location.href =
-        "employer-dashboard.html";
+      let result = {};
 
-    }, 1500);
+      try {
+        result = JSON.parse(text);
+      } catch {
+        result = {
+          message: text
+        };
+      }
 
 
-  } catch (error) {
+      if (!response.ok) {
 
-    console.error(error);
+        console.error(
+          "Supabase posting error:",
+          result
+        );
 
-    showMessage(
-      "❌ " + error.message,
-      "#ffe5e5",
-      "#b00020"
-    );
+        throw new Error(
+          result.message ||
+          result.details ||
+          result.hint ||
+          "Could not post opportunity."
+        );
+      }
 
-    submitButton.disabled = false;
-    submitButton.textContent = "🚀 Post Opportunity";
+
+      console.log(
+        "Opportunity created:",
+        result
+      );
+
+
+      showMessage(
+        "🎉 Opportunity posted successfully! 🇿🇲",
+        "#dff7e8",
+        "#087f3f"
+      );
+
+
+      form.reset();
+
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "employer-dashboard.html";
+
+        },
+        1500
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        "❌ " + error.message,
+        "#ffe5e5",
+        "#b00020"
+      );
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        "🚀 Post Opportunity";
+    }
+
   }
+);
 
-});
 
+/* =========================
+   START PAGE
+========================= */
 
-/* Start */
 loadUser();
 
 </script>
