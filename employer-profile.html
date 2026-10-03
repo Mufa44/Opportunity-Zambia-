@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Profile | Opportunity Zambia 🇿🇲</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4fff8;
+      color: #222;
+    }
+
+    header {
+      background: #087f3f;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #087f3f;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input[readonly] {
+      background: #eee;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #087f3f;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      background: #777;
+    }
+
+    #message {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    .success {
+      display: block !important;
+      background: #dff7e8;
+      color: #087f3f;
+    }
+
+    .error {
+      display: block !important;
+      background: #ffe1e1;
+      color: #b00020;
+    }
+
+    .loading {
+      display: block !important;
+      background: #fff4cc;
+      color: #765900;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">← Opportunity Zambia 🇿🇲</a>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h1>Employer Profile</h1>
+
+    <p class="intro">
+      Tell young Zambians about your organization.
+    </p>
+
+    <form id="employerForm">
+
+      <label>Company / Organization Name *</label>
+      <input type="text" id="organization_name" required
+             placeholder="e.g. Mufa Mobile Hub">
+
+      <label>Organization Type</label>
+      <select id="organization_type">
+        <option value="">Select type</option>
+        <option>Company</option>
+        <option>Small Business</option>
+        <option>NGO</option>
+        <option>Government</option>
+        <option>School / College</option>
+        <option>Training Institution</option>
+        <option>Other</option>
+      </select>
+
+      <label>Location *</label>
+      <input type="text" id="location" required
+             placeholder="e.g. Lusaka">
+
+      <label>Phone</label>
+      <input type="text" id="phone"
+             placeholder="e.g. 097xxxxxxx">
+
+      <label>Email</label>
+      <input type="email" id="email" readonly>
+
+      <label>About Your Organization</label>
+      <textarea id="description"
+                placeholder="Briefly describe your organization"></textarea>
+
+      <label>Website (Optional)</label>
+      <input type="url" id="website"
+             placeholder="https://example.com">
+
+      <button type="submit" id="saveButton">
+        💾 Save Company Profile
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://jawhldlfwvgrbothjjkz.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+
+const token = localStorage.getItem("oz_access_token");
+const userId = localStorage.getItem("oz_user_id");
+
+const form = document.getElementById("employerForm");
+const emailField = document.getElementById("email");
+const message = document.getElementById("message");
+const saveButton = document.getElementById("saveButton");
+
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = type;
+}
+
+async function loadUser() {
+
+  if (!token || !userId) {
+    showMessage(
+      "⚠️ Please login with your employer account first.",
+      "error"
+    );
+
+    saveButton.disabled = true;
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL + "/auth/v1/user",
+      {
+        method: "GET",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + token
+        }
+      }
+    );
+
+    const user = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        user.message || user.msg || "Could not load account."
+      );
+    }
+
+    emailField.value = user.email || "";
+
+  } catch (error) {
+
+    showMessage(
+      "⚠️ Could not load your account: " + error.message,
+      "error"
+    );
+
+    saveButton.disabled = true;
+  }
+}
+
+
+form.addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  if (!token || !userId) {
+    showMessage(
+      "⚠️ Please login first.",
+      "error"
+    );
+    return;
+  }
+
+  const organizationName =
+    document.getElementById("organization_name").value.trim();
+
+  const location =
+    document.getElementById("location").value.trim();
+
+  if (!organizationName || !location) {
+    showMessage(
+      "⚠️ Please enter the company name and location.",
+      "error"
+    );
+    return;
+  }
+
+  saveButton.disabled = true;
+  saveButton.textContent = "Saving...";
+
+  showMessage(
+    "⏳ Saving company profile...",
+    "loading"
+  );
+
+  const employerData = {
+
+    user_id: userId,
+
+    organization_name:
+      organizationName,
+
+    organization_type:
+      document.getElementById("organization_type").value,
+
+    location:
+      location,
+
+    phone:
+      document.getElementById("phone").value.trim(),
+
+    email:
+      emailField.value.trim(),
+
+    description:
+      document.getElementById("description").value.trim(),
+
+    website:
+      document.getElementById("website").value.trim()
+
+  };
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/employer_profiles",
+      {
+        method: "POST",
+
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + token,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+
+        body: JSON.stringify(employerData)
+      }
+    );
+
+    const responseText = await response.text();
+
+    if (!response.ok) {
+
+      let errorMessage = responseText;
+
+      try {
+
+        const errorData =
+          JSON.parse(responseText);
+
+        errorMessage =
+          errorData.message ||
+          errorData.msg ||
+          errorData.hint ||
+          errorData.details ||
+          responseText;
+
+      } catch (e) {}
+
+      throw new Error(errorMessage);
+    }
+
+    showMessage(
+      "🎉 Company profile saved successfully! 🇿🇲",
+      "success"
+    );
+
+    saveButton.textContent =
+      "✅ Company Profile Saved";
+
+  } catch (error) {
+
+    console.error(
+      "Employer profile error:",
+      error
+    );
+
+    showMessage(
+      "❌ Company profile could not be saved.\n\n" +
+      error.message,
+      "error"
+    );
+
+    saveButton.disabled = false;
+    saveButton.textContent =
+      "💾 Save Company Profile";
+  }
+
+});
+
+loadUser();
+
+</script>
+
+</body>
+</html>
