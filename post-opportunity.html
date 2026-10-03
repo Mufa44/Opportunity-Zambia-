@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Post Opportunity | Opportunity Zambia 🇿🇲</title>
 
 <style>
@@ -29,7 +30,9 @@ header {
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   padding: 12px;
   margin: 8px 0 16px;
@@ -66,6 +69,10 @@ a {
   color: #087f3f;
 }
 </style>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
@@ -77,52 +84,105 @@ a {
 
 <div class="container">
 
-  <p><a href="employer-dashboard.html">← Back to Dashboard</a></p>
+  <p>
+    <a href="employer-dashboard.html">
+      ← Back to Dashboard
+    </a>
+  </p>
 
   <form id="opportunityForm">
 
     <label>Opportunity Title</label>
-    <input id="title" required placeholder="e.g. Driver">
+    <input
+      id="title"
+      required
+      placeholder="e.g. Driver"
+    >
 
     <label>Description</label>
-    <textarea id="description" required
-      placeholder="Describe the opportunity"></textarea>
+    <textarea
+      id="description"
+      required
+      placeholder="Describe the opportunity"
+    ></textarea>
 
     <label>Opportunity Type</label>
+
     <select id="opportunity_type" required>
+
       <option value="">Select type</option>
-      <option>Job</option>
-      <option>Internship</option>
-      <option>Apprenticeship</option>
-      <option>Training</option>
-      <option>Business Opportunity</option>
-      <option>Freelance Work</option>
+
+      <option value="Job">
+        Job
+      </option>
+
+      <option value="Internship">
+        Internship
+      </option>
+
+      <option value="Apprenticeship">
+        Apprenticeship
+      </option>
+
+      <option value="Training">
+        Training
+      </option>
+
+      <option value="Business Opportunity">
+        Business Opportunity
+      </option>
+
+      <option value="Freelance Work">
+        Freelance Work
+      </option>
+
     </select>
 
     <label>Category</label>
-    <input id="category" placeholder="e.g. Technology, Transport">
+
+    <input
+      id="category"
+      placeholder="e.g. Technology, Transport"
+    >
 
     <label>Location</label>
-    <input id="location" placeholder="e.g. Lusaka">
+
+    <input
+      id="location"
+      placeholder="e.g. Lusaka"
+    >
 
     <label>Requirements</label>
-    <textarea id="requirements"
-      placeholder="Skills, qualifications or requirements"></textarea>
+
+    <textarea
+      id="requirements"
+      placeholder="Skills, qualifications or requirements"
+    ></textarea>
 
     <label>Application Link</label>
-    <input id="application_link"
-      placeholder="WhatsApp number, email or application link">
+
+    <input
+      id="application_link"
+      placeholder="WhatsApp number, email or application link"
+    >
 
     <label>Deadline</label>
-    <input id="deadline" type="date">
 
-    <button type="submit">🚀 Post Opportunity</button>
+    <input
+      id="deadline"
+      type="date"
+    >
+
+    <button type="submit">
+      🚀 Post Opportunity
+    </button>
 
   </form>
 
   <div id="message"></div>
 
 </div>
+
 
 <script>
 
@@ -132,134 +192,134 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-let accessToken = localStorage.getItem("oz_access_token");
-let currentUser = null;
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-/* =========================
-   REFRESH LOGIN SESSION
-========================= */
-
-async function refreshSession() {
-
-  const refreshToken =
-    localStorage.getItem("oz_refresh_token");
-
-  if (!refreshToken) {
-    throw new Error("No refresh token found. Please login again.");
-  }
-
-  const response = await fetch(
-    SUPABASE_URL +
-    "/auth/v1/token?grant_type=refresh_token",
-    {
-      method: "POST",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        refresh_token: refreshToken
-      })
-    }
-  );
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    console.log("Refresh error:", data);
-    throw new Error("Your login session has expired. Please login again.");
-  }
-
-  accessToken = data.access_token;
-
-  localStorage.setItem(
-    "oz_access_token",
-    data.access_token
-  );
-
-  if (data.refresh_token) {
-    localStorage.setItem(
-      "oz_refresh_token",
-      data.refresh_token
-    );
-  }
-
-  return accessToken;
-}
-
-
-/* =========================
-   GET CURRENT USER
-========================= */
-
-async function getCurrentUser() {
-
-  if (!accessToken) {
-    throw new Error("Please login first.");
-  }
-
-  const response = await fetch(
-    SUPABASE_URL + "/auth/v1/user",
-    {
-      method: "GET",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + accessToken
-      }
-    }
-  );
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error("Unable to verify your account.");
-  }
-
-  currentUser = data;
-
-  localStorage.setItem(
-    "oz_user_id",
-    currentUser.id
-  );
-
-  console.log("LOGGED IN USER:", currentUser.id);
-
-  return currentUser;
-}
+const message =
+  document.getElementById("message");
 
 
 /* =========================
    CHECK LOGIN
 ========================= */
 
-async function initialise() {
+async function checkLogin() {
 
-  try {
+  const accessToken =
+    localStorage.getItem("oz_access_token");
 
-    if (!accessToken) {
-      await refreshSession();
-    }
+  const refreshToken =
+    localStorage.getItem("oz_refresh_token");
 
-    try {
-      await getCurrentUser();
-    } catch (error) {
-      await refreshSession();
-      await getCurrentUser();
-    }
+  if (!accessToken || !refreshToken) {
 
-  } catch (error) {
-
-    document.getElementById("message").innerHTML =
-      "❌ " + error.message +
-      ' <a href="auth.html">Login again</a>';
+    message.innerHTML =
+      '❌ Please login first. <a href="auth.html">Login</a>';
 
     document.getElementById("opportunityForm")
       .style.display = "none";
+
+    return false;
   }
+
+
+  /*
+    Give Supabase the same session
+    created by your login page.
+  */
+
+  const { data, error } =
+    await supabase.auth.setSession({
+
+      access_token: accessToken,
+
+      refresh_token: refreshToken
+
+    });
+
+
+  if (error) {
+
+    console.error(
+      "Session error:",
+      error
+    );
+
+    message.innerHTML =
+      '❌ Your login session has expired. <a href="auth.html">Login again</a>';
+
+    document.getElementById("opportunityForm")
+      .style.display = "none";
+
+    return false;
+  }
+
+
+  /*
+    Save refreshed tokens.
+  */
+
+  if (data.session) {
+
+    localStorage.setItem(
+      "oz_access_token",
+      data.session.access_token
+    );
+
+    localStorage.setItem(
+      "oz_refresh_token",
+      data.session.refresh_token
+    );
+
+  }
+
+
+  const user =
+    data.user;
+
+
+  if (!user) {
+
+    message.innerHTML =
+      '❌ Please login first. <a href="auth.html">Login</a>';
+
+    document.getElementById("opportunityForm")
+      .style.display = "none";
+
+    return false;
+  }
+
+
+  /*
+    Save the real authenticated
+    Supabase user ID.
+  */
+
+  localStorage.setItem(
+    "oz_user_id",
+    user.id
+  );
+
+
+  console.log(
+    "AUTHENTICATED USER:",
+    user.id
+  );
+
+
+  return true;
 }
 
-initialise();
+
+/* =========================
+   START
+========================= */
+
+checkLogin();
 
 
 /* =========================
@@ -267,139 +327,213 @@ initialise();
 ========================= */
 
 document
-.getElementById("opportunityForm")
-.addEventListener("submit", async function(event) {
+  .getElementById("opportunityForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
 
-  event.preventDefault();
-
-  const message =
-    document.getElementById("message");
-
-  message.innerHTML = "⏳ Posting opportunity...";
-
-  try {
-
-    /*
-      Always refresh immediately before posting.
-      This guarantees we use a fresh authenticated JWT.
-    */
-
-    await refreshSession();
-
-    await getCurrentUser();
-
-    if (!currentUser || !currentUser.id) {
-      throw new Error("Could not identify your employer account.");
-    }
-
-    const opportunity = {
-
-      title:
-        document.getElementById("title").value.trim(),
-
-      description:
-        document.getElementById("description").value.trim(),
-
-      organization:
-        "Mufa phone hun",
-
-      location:
-        document.getElementById("location").value.trim(),
-
-      opportunity_type:
-        document.getElementById("opportunity_type").value,
-
-      category:
-        document.getElementById("category").value.trim(),
-
-      requirements:
-        document.getElementById("requirements").value.trim(),
-
-      application_link:
-        document.getElementById("application_link").value.trim(),
-
-      deadline:
-        document.getElementById("deadline").value || null,
-
-      employer_id:
-        currentUser.id,
-
-      verified:
-        false,
-
-      status:
-        "active"
-    };
+      event.preventDefault();
 
 
-    console.log(
-      "POSTING AS EMPLOYER:",
-      currentUser.id
-    );
+      message.innerHTML =
+        "⏳ Posting opportunity...";
 
-    const response = await fetch(
-      SUPABASE_URL + "/rest/v1/opportunities",
-      {
-        method: "POST",
 
-        headers: {
-          "apikey": SUPABASE_KEY,
+      try {
 
-          "Authorization":
-            "Bearer " + accessToken,
+        /*
+          Get the current Supabase
+          authenticated user.
+        */
 
-          "Content-Type":
-            "application/json",
+        const {
+          data: {
+            user
+          },
+          error: userError
+        } =
+          await supabase.auth.getUser();
 
-          "Prefer":
-            "return=representation"
-        },
 
-        body:
-          JSON.stringify(opportunity)
+        if (userError) {
+
+          throw userError;
+
+        }
+
+
+        if (!user) {
+
+          throw new Error(
+            "Please login again."
+          );
+
+        }
+
+
+        /*
+          IMPORTANT:
+          This is the ID that RLS
+          compares with employer_id.
+        */
+
+        const employerId =
+          user.id;
+
+
+        console.log(
+          "EMPLOYER ID:",
+          employerId
+        );
+
+
+        const opportunity = {
+
+          title:
+            document
+              .getElementById("title")
+              .value
+              .trim(),
+
+          description:
+            document
+              .getElementById("description")
+              .value
+              .trim(),
+
+          organization:
+            "Mufa phone hun",
+
+          location:
+            document
+              .getElementById("location")
+              .value
+              .trim(),
+
+          opportunity_type:
+            document
+              .getElementById("opportunity_type")
+              .value,
+
+          category:
+            document
+              .getElementById("category")
+              .value
+              .trim(),
+
+          requirements:
+            document
+              .getElementById("requirements")
+              .value
+              .trim(),
+
+          application_link:
+            document
+              .getElementById("application_link")
+              .value
+              .trim(),
+
+          deadline:
+            document
+              .getElementById("deadline")
+              .value || null,
+
+          employer_id:
+            employerId,
+
+          verified:
+            false,
+
+          status:
+            "active"
+
+        };
+
+
+        console.log(
+          "OPPORTUNITY:",
+          opportunity
+        );
+
+
+        /*
+          Insert using the authenticated
+          Supabase client.
+        */
+
+        const {
+          data,
+          error
+        } =
+          await supabase
+            .from("opportunities")
+            .insert([
+              opportunity
+            ])
+            .select();
+
+
+        if (error) {
+
+          console.error(
+            "SUPABASE ERROR:",
+            error
+          );
+
+          throw error;
+
+        }
+
+
+        console.log(
+          "SUCCESS:",
+          data
+        );
+
+
+        message.innerHTML =
+          "🎉 Opportunity posted successfully! 🇿🇲";
+
+
+        document
+          .getElementById("opportunityForm")
+          .reset();
+
+
+        /*
+          Go back to employer dashboard.
+        */
+
+        setTimeout(
+          function() {
+
+            window.location.href =
+              "employer-dashboard.html";
+
+          },
+          1200
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "POST ERROR:",
+          error
+        );
+
+
+        message.innerHTML =
+          "❌ " +
+          (
+            error.message ||
+            "Unable to post opportunity."
+          );
+
       }
-    );
 
-    const result =
-      await response.json();
-
-    console.log("SUPABASE RESPONSE:", result);
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        result.error_description ||
-        result.details ||
-        result.hint ||
-        JSON.stringify(result)
-      );
     }
-
-
-    message.innerHTML =
-      "🎉 Opportunity posted successfully! 🇿🇲";
-
-    document.getElementById("opportunityForm")
-      .reset();
-
-    setTimeout(function() {
-
-      window.location.href =
-        "employer-dashboard.html";
-
-    }, 1200);
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    message.innerHTML =
-      "❌ " + error.message;
-  }
-
-});
+  );
 
 </script>
 
