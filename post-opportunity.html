@@ -1,185 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Post an Opportunity | Opportunity Zambia 🇿🇲</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Opportunity | Opportunity Zambia 🇿🇲</title>
 
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f5;color:#17231a}
-header{background:#087f3f;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:23px;font-weight:bold}
-header a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:linear-gradient(135deg,#087f3f,#0aa957);color:white;text-align:center;padding:50px 20px}
-.hero h1{font-size:clamp(34px,7vw,50px);margin:0 0 15px}
-.hero p{max-width:650px;margin:auto;line-height:1.6}
-.container{max-width:850px;margin:40px auto;padding:0 20px}
-.form-box{background:white;padding:30px;border-radius:18px;box-shadow:0 5px 25px rgba(0,0,0,.08)}
-h2{color:#087f3f;border-bottom:2px solid #e8f5ec;padding-bottom:10px;margin-top:30px}
-label{display:block;font-weight:bold;margin:15px 0 7px}
-input,select,textarea{width:100%;padding:14px;border:1px solid #ccd8cf;border-radius:9px;font-size:15px;font-family:Arial}
-textarea{min-height:130px;resize:vertical}
-.submit{width:100%;margin-top:30px;background:#087f3f;color:white;border:none;padding:16px;border-radius:10px;font-size:17px;font-weight:bold;cursor:pointer}
-.note{background:#e8f5ec;color:#245c39;padding:15px;border-radius:10px;line-height:1.5}
-#message{display:none;margin-top:15px;padding:15px;border-radius:10px}
-footer{background:#063d21;color:white;text-align:center;padding:25px;margin-top:50px}
-</style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4faf6;
+      color: #222;
+    }
+
+    header {
+      background: #087f3f;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #087f3f;
+      margin-top: 0;
+    }
+
+    .intro {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 16px;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      background: #087f3f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #066b35;
+    }
+
+    #message {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">🇿🇲 Opportunity Zambia</div>
-<a href="index.html">← Home</a>
+  <a href="employer-dashboard.html">← Employer Dashboard 🇿🇲</a>
 </header>
-
-<section class="hero">
-<h1>Post an Opportunity</h1>
-<p>Help young Zambians discover genuine jobs, internships, apprenticeships and training opportunities.</p>
-</section>
 
 <div class="container">
 
-<div class="form-box">
+  <div class="card">
 
-<div class="note">
-💡 Please provide accurate information. Opportunity Zambia is designed to connect young people with genuine opportunities.
-</div>
+    <h1>📢 Post an Opportunity</h1>
 
-<form id="opportunityForm">
+    <p class="intro">
+      Connect with young Zambians looking for genuine opportunities.
+    </p>
 
-<h2>🏢 Organisation</h2>
+    <form id="opportunityForm">
 
-<label>Organisation / Company Name</label>
-<input id="organization" required placeholder="Enter organisation name">
+      <label for="title">Opportunity Title *</label>
+      <input
+        type="text"
+        id="title"
+        placeholder="e.g. Driver"
+        required
+      >
 
-<h2>💼 Opportunity</h2>
+      <label for="description">Description *</label>
+      <textarea
+        id="description"
+        placeholder="Describe the opportunity..."
+        required
+      ></textarea>
 
-<label>Opportunity Title</label>
-<input id="title" required placeholder="Example: Junior Computer Technician">
+      <label for="organization">Company / Organization *</label>
+      <input
+        type="text"
+        id="organization"
+        placeholder="Company name"
+        required
+      >
 
-<label>Opportunity Type</label>
-<select id="opportunityType" required>
-<option value="">Select type</option>
-<option>Job</option>
-<option>Internship</option>
-<option>Apprenticeship</option>
-<option>Training</option>
-<option>Business Opportunity</option>
-<option>Freelance Work</option>
-</select>
+      <label for="location">Location *</label>
+      <input
+        type="text"
+        id="location"
+        placeholder="e.g. Lusaka"
+        required
+      >
 
-<label>Category</label>
-<input id="category" required placeholder="Example: Technology, Agriculture, Finance">
+      <label for="opportunity_type">Opportunity Type *</label>
+      <select id="opportunity_type" required>
+        <option value="">Select type</option>
+        <option value="Job">Job</option>
+        <option value="Internship">Internship</option>
+        <option value="Apprenticeship">Apprenticeship</option>
+        <option value="Training">Training</option>
+        <option value="Business Opportunity">Business Opportunity</option>
+        <option value="Freelance Work">Freelance Work</option>
+      </select>
 
-<label>Location / Province</label>
-<select id="location">
-<option value="">Select province</option>
-<option>Lusaka</option>
-<option>Copperbelt</option>
-<option>Central</option>
-<option>Eastern</option>
-<option>Luapula</option>
-<option>Northern</option>
-<option>Muchinga</option>
-<option>North-Western</option>
-<option>Southern</option>
-<option>Western</option>
-</select>
+      <label for="category">Category</label>
+      <input
+        type="text"
+        id="category"
+        placeholder="e.g. Technology, Driving, Sales"
+      >
 
-<h2>📝 Details</h2>
+      <label for="requirements">Requirements</label>
+      <textarea
+        id="requirements"
+        placeholder="What skills or qualifications are required?"
+      ></textarea>
 
-<label>Description</label>
-<textarea id="description" required placeholder="Describe the opportunity..."></textarea>
+      <label for="application_link">Application Link</label>
+      <input
+        type="url"
+        id="application_link"
+        placeholder="https://..."
+      >
 
-<label>Requirements</label>
-<textarea id="requirements" placeholder="List the main requirements..."></textarea>
+      <label for="deadline">Application Deadline</label>
+      <input
+        type="date"
+        id="deadline"
+      >
 
-<h2>🔗 Application</h2>
+      <button type="submit">
+        🚀 Post Opportunity
+      </button>
 
-<label>Application Link</label>
-<input id="applicationLink" type="url" placeholder="https://...">
+    </form>
 
-<label>Application Deadline</label>
-<input id="deadline" type="date">
+    <div id="message"></div>
 
-<button class="submit" type="submit">
-🚀 Post Opportunity
-</button>
+  </div>
 
-<div id="message"></div>
-
-</form>
-
-</div>
 </div>
 
 <footer>
-© 2026 Opportunity Zambia 🇿🇲
-<br><br>
-Learn → Build → Work → Earn
+  Learn → Build → Work → Earn 🇿🇲
 </footer>
 
 <script>
+  const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
 
-const SUPABASE_URL = "https://jawhldlfwvgrbothjjkz.supabase.co";
+  const token = localStorage.getItem("oz_access_token");
+  const userId = localStorage.getItem("oz_user_id");
 
-const SUPABASE_KEY = "sb_publishable_Mr-wTes1EIURPO5r39gSSA_p19xR3Ey";
+  const form = document.getElementById("opportunityForm");
+  const message = document.getElementById("message");
 
-document.getElementById("opportunityForm").addEventListener("submit", async function(e){
+  if (!token || !userId) {
+    message.style.display = "block";
+    message.style.background = "#ffe5e5";
+    message.style.color = "#b00020";
+    message.innerHTML =
+      "Please log in to an employer account before posting an opportunity.";
+    form.style.display = "none";
+  }
 
-e.preventDefault();
+  form.addEventListener("submit", async function(event) {
 
-const message = document.getElementById("message");
+    event.preventDefault();
 
-message.style.display = "block";
-message.textContent = "Posting opportunity...";
+    message.style.display = "block";
+    message.style.background = "#fff3cd";
+    message.style.color = "#856404";
+    message.innerHTML = "Posting your opportunity...";
 
-const opportunity = {
-organization: document.getElementById("organization").value,
-title: document.getElementById("title").value,
-opportunity_type: document.getElementById("opportunityType").value,
-category: document.getElementById("category").value,
-location: document.getElementById("location").value,
-description: document.getElementById("description").value,
-requirements: document.getElementById("requirements").value,
-application_link: document.getElementById("applicationLink").value || "#",
-deadline: document.getElementById("deadline").value || null
-};
+    const opportunity = {
+      title: document.getElementById("title").value.trim(),
+      description: document.getElementById("description").value.trim(),
+      organization: document.getElementById("organization").value.trim(),
+      location: document.getElementById("location").value.trim(),
+      opportunity_type: document.getElementById("opportunity_type").value,
+      category: document.getElementById("category").value.trim(),
+      requirements: document.getElementById("requirements").value.trim(),
+      application_link: document.getElementById("application_link").value.trim() || null,
+      deadline: document.getElementById("deadline").value || null,
 
-try{
+      /* THIS CONNECTS THE OPPORTUNITY TO THE EMPLOYER */
+      employer_id: userId,
 
-const response = await fetch(
-SUPABASE_URL + "/rest/v1/opportunities",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer " + SUPABASE_KEY,
-"Prefer":"return=minimal"
-},
-body:JSON.stringify(opportunity)
-}
-);
+      /* New opportunities start active and unverified */
+      verified: false,
+      status: "active"
+    };
 
-if(!response.ok){
-throw new Error("Post failed");
-}
+    try {
 
-message.textContent = "🎉 Opportunity posted successfully! 🇿🇲";
+      const response = await fetch(
+        SUPABASE_URL + "/rest/v1/opportunities",
+        {
+          method: "POST",
 
-document.getElementById("opportunityForm").reset();
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+          },
 
-}catch(error){
+          body: JSON.stringify(opportunity)
+        }
+      );
 
-message.textContent = "❌ Opportunity could not be posted. Please try again.";
+      const data = await response.json();
 
-}
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+          data.error_description ||
+          "Could not post opportunity."
+        );
+      }
 
-});
+      message.style.background = "#d4edda";
+      message.style.color = "#155724";
 
+      message.innerHTML =
+        "🎉 Opportunity posted successfully! 🇿🇲<br><br>" +
+        "Your opportunity has been added to Opportunity Zambia.";
+
+      form.reset();
+
+      setTimeout(function() {
+        window.location.href = "employer-dashboard.html";
+      }, 1500);
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.style.background = "#ffe5e5";
+      message.style.color = "#b00020";
+
+      message.innerHTML =
+        "❌ " + error.message;
+    }
+
+  });
 </script>
 
 </body>
